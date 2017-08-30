@@ -147,7 +147,6 @@ public class MoveBaseActivity extends Activity {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
                 def_linearSpeed = (progress * MAX_MOVEBASE_LINEARSPEED) / 100;
-                System.out.println(def_linearSpeed);
             }
 
             @Override
