@@ -27,6 +27,7 @@ public class MainActivity extends Activity {
     EditText etPort;
 
     ROSBridgeClient client;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -40,23 +41,23 @@ public class MainActivity extends Activity {
             @Override
             public void onConnect() {
                 client.setDebug(true);
-                ((RCApplication)getApplication()).setRosClient(client);
+                ((RCApplication) getApplication()).setRosClient(client);
                 showTip("Connect ROS success");
-                Log.d(TAG,"Connect ROS success");
-                startActivity(new Intent(MainActivity.this,ChooseActivity.class));
+                Log.d(TAG, "Connect ROS success");
+                startActivity(new Intent(MainActivity.this, ChooseActivity.class));
             }
 
             @Override
             public void onDisconnect(boolean normal, String reason, int code) {
                 showTip("ROS disconnect");
-                Log.d(TAG,"ROS disconnect");
+                Log.d(TAG, "ROS disconnect");
             }
 
             @Override
             public void onError(Exception ex) {
                 ex.printStackTrace();
                 showTip("ROS communication error");
-                Log.d(TAG,"ROS communication error");
+                Log.d(TAG, "ROS communication error");
             }
         });
     }
@@ -65,14 +66,14 @@ public class MainActivity extends Activity {
         runOnUiThread(new Runnable() {
             @Override
             public void run() {
-                Toast.makeText(MainActivity.this, tip,Toast.LENGTH_SHORT).show();
+                Toast.makeText(MainActivity.this, tip, Toast.LENGTH_SHORT).show();
             }
         });
     }
 
-    @OnClick({R.id.tv_ros,R.id.btn_connect})
+    @OnClick({R.id.tv_ros, R.id.btn_connect})
     public void onClick(View view) {
-        switch(view.getId()) {
+        switch (view.getId()) {
             case R.id.tv_ros:
                 break;
             case R.id.btn_connect:
@@ -80,7 +81,8 @@ public class MainActivity extends Activity {
                 String port = etPort.getText().toString();
                 connect(ip, port);
                 break;
-            default:break;
+            default:
+                break;
         }
     }
 }
