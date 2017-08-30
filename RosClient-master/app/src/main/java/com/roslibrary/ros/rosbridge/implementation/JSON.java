@@ -1,21 +1,20 @@
 /**
  * Copyright (c) 2014 Jilk Systems, Inc.
- * 
+ * <p>
  * This file is part of the Java ROSBridge Client.
- *
+ * <p>
  * The Java ROSBridge Client is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
  * the Free Software Foundation, either version 3 of the License, or
  * (at your option) any later version.
- *
+ * <p>
  * The Java ROSBridge Client is distributed in the hope that it will be useful,
  * but WITHOUT ANY WARRANTY; without even the implied warranty of
  * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
  * GNU General Public License for more details.
- *
+ * <p>
  * You should have received a copy of the GNU General Public License
  * along with the Java ROSBridge Client.  If not, see http://www.gnu.org/licenses/.
- * 
  */
 package com.roslibrary.ros.rosbridge.implementation;
 
@@ -58,13 +57,13 @@ public class JSON {
      * message using @Operation and @Message types. This includes situations
      * where one or more fields are marked to be turned into arrays, using @AsArray. 
      * @param m  the @Message object to be recursively translated.
-     * @return   the complete JSON string.
+     * @return the complete JSON string.
      */
     public static String toJSON(Message m) {
         JSONObject jo = convertObjectToJSONObject(m); // Object to JSON-Simple
         return jo.toJSONString();                     // JSON-Simple to string
     }
-    
+
     /**
      * Translates JSON into a hierarchical Operation/Message structure.
      * This includes handling fields that are @Indicated and @AsArray. If the
@@ -73,7 +72,7 @@ public class JSON {
      * @param json  the source JSON string
      * @param c     the top level class of the JSON. Normally @Wrapper
      * @param r     the @Registry containing topic registrations
-     * @return      the fully instantiated message hierarchy represented
+     * @return the fully instantiated message hierarchy represented
      *              by the JSON string.
      */
     public static Message toMessage(String json, Class c, Registry<Class> r) {
@@ -83,9 +82,9 @@ public class JSON {
             jo = wrap(joUnwrapped, c);                            // wrap: a hack to make the hierarchy homogeneous
         return convertJSONObjectToMessage(jo, c, r);              // JSON-Simple to Message
     }
-    
+
     // *** Create JSON from Messages *** //
-    
+
     // Translate the object into a JSON-Simple object, field-by-field,
     //   recursively via convertElementToJSON.
     //   except for the case where AsArray is indicated
@@ -105,7 +104,7 @@ public class JSON {
         }
         return result;
     }
-    
+
     // Convert an array type to a JSON-Simple array, element-by-element,
     //    recursively via convertElementToJSON.
     private static JSONArray convertArrayToJSONArray(Object array) {
@@ -116,10 +115,10 @@ public class JSON {
                 Object resultObject = convertElementToJSON(elementObject);
                 result.add(resultObject);
             }
-        }        
+        }
         return result;
     }
-    
+
     // For AsArray objects, convert the object to a JSON-Simple array
     //     NOTE: This relies on later versions of the JDK providing 
     //           the fields in order.
@@ -134,14 +133,14 @@ public class JSON {
         }
         return result;
     }
-            
+
     // Convert the individual field or array element items recursively
     private static Object convertElementToJSON(Object elementObject) {
         Class elementClass = elementObject.getClass();
         Object resultObject;
         if (Message.isPrimitive(elementClass))
             resultObject = elementObject;
-        else if (elementClass.isArray())  
+        else if (elementClass.isArray())
             resultObject = convertArrayToJSONArray(elementObject);
         else
             resultObject = convertObjectToJSONObject(elementObject);
@@ -150,24 +149,23 @@ public class JSON {
 
     // Special case for Base 64-encoded fields
     private static Object convertByteArrayToBase64JSONString(Object fieldObject) {
-        return Base64.encodeToString((byte[]) fieldObject, false);    
+        return Base64.encodeToString((byte[]) fieldObject, false);
     }
-    
+
     // This is just to buffer the code from the exception. Better error
     //    handling needed here.
     private static Object getFieldObject(Field f, Object o) {
         Object fo = null;
         try {
             fo = f.get(o);
-        }
-        catch (IllegalAccessException ex) {
+        } catch (IllegalAccessException ex) {
             ex.printStackTrace();
         }
         return fo;
-    }        
-    
+    }
+
     // *** Create Messages from JSON *** //
-    
+
     // Use the JSON-simple parser to create the JSON-Simple object
     private static JSONObject convertStringToJSONObject(String json) {
         JSONObject result = null;
@@ -175,14 +173,13 @@ public class JSON {
         JSONParser jp = new JSONParser();
         try {
             result = (JSONObject) jp.parse(r);
-        }
-        catch (Throwable t) {
+        } catch (Throwable t) {
             System.out.println(t.getMessage());
         }
-        r.close();        
+        r.close();
         return result;
     }
-    
+
     // A bit of a hack to create a consistent hierarchy with jsonbridge operations
     // At least it does not depend on any specific field names, it just copies the 
     // Indicator and Indicated fields.
@@ -194,7 +191,7 @@ public class JSON {
         result.put(indicatedName, jo);
         return result;
     }
-            
+
     // Convert the JSON-Simple object to the indicated message, field-by-field
     //    recursively via convertElementToField.
     private static Message convertJSONObjectToMessage(JSONObject jo, Class c, Registry<Class> r) {
@@ -208,13 +205,12 @@ public class JSON {
                     Object value = convertElementToField(lookup, fc, f, r);
                     f.set(result, value);
                 }
-            }      
+            }
             return result;
-        }
-        catch (Exception ex) {
+        } catch (Exception ex) {
             //ex.printStackTrace();
             return null;
-        }        
+        }
     }
 
     // Convert the JSON-Simple array to the indicated message, element-by-element
@@ -229,15 +225,15 @@ public class JSON {
                     value = convertJSONObjectToMessage((JSONObject) lookup, c, r);
                 else if (lookup.getClass().equals(JSONArray.class))  // this is not actually allowed in ROS
                     value = convertJSONArrayToArray((JSONArray) lookup, c.getComponentType(), r);
-                else 
+                else
                     value = convertJSONPrimitiveToPrimitive(lookup, c);
                 Array.set(result, i, value);
             }
         }
-        
+
         return result;
     }
-    
+
     // Convert a JSON-Simple array to a Message, field-by-field of the Message,
     //     element-by-element of the array, recursively via convertElementToField.
     //     NOTE: This relies on later versions of the JDK providing 
@@ -254,13 +250,12 @@ public class JSON {
                     f.set(result, value);
                 }
             }
-            
+
             return result;
-        }
-        catch (Exception ex) {
+        } catch (Exception ex) {
             ex.printStackTrace();
             return null;
-        }        
+        }
     }
 
     // Convert an individual array or object element to a field in the Message,
@@ -271,23 +266,21 @@ public class JSON {
         if (element.getClass().equals(JSONObject.class)) {
             //System.out.println("JSON.convertElementToField: JSON Object " + ((JSONObject) element).toJSONString());
             value = convertJSONObjectToMessage((JSONObject) element, fc, r);
-        }
-        else if (element.getClass().equals(JSONArray.class)) {
+        } else if (element.getClass().equals(JSONArray.class)) {
             //System.out.println("JSON.convertElementToField: JSON Array " + ((JSONArray) element).toJSONString());
             if (Indication.asArray(f))
                 value = convertJSONArrayToMessage((JSONArray) element, fc, r);
             else value = convertJSONArrayToArray((JSONArray) element, fc, r);
-        }
-        else {
+        } else {
             //System.out.println("JSON.convertElementToField: Primitive " + element);
             if (Indication.isBase64Encoded(f))
                 value = convertBase64JSONStringToByteArray(element);
             else value = convertJSONPrimitiveToPrimitive(element, fc);
         }
-         
-        return value;        
+
+        return value;
     }
-    
+
     // Note that this is not checking ranges
     public static Object convertJSONPrimitiveToPrimitive(Object o, Class c) {
         Object result = o;
@@ -307,10 +300,10 @@ public class JSON {
         }
         return result;
     }
-    
+
     public static byte[] convertBase64JSONStringToByteArray(Object element) {
         return Base64.decode((String) element);
-    }    
+    }
 
     // Determine the target class of a field in the object or array, based
     //    directly on the field's type, or using the Indicator if applicable,    
@@ -326,10 +319,7 @@ public class JSON {
             //        (String) jo.get(Indication.getIndicatorName(parent.getClass())));
             fc = r.lookup(parent.getClass(),
                     (String) jo.get(Indication.getIndicatorName(parent.getClass())));
-            //System.out.println("JSON.getFieldClass: parent class " + parent.getClass().getName() +
-            //        " Indicator: " + Indication.getIndicatorName(parent.getClass()) + 
-            //        " result: " + fc.getName());
         }
         return fc;
-    }            
+    }
 }

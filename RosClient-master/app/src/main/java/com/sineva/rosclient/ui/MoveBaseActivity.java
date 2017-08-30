@@ -20,8 +20,8 @@ public class MoveBaseActivity extends Activity {
 
     private ROSBridgeClient client;
 
-    private Double linearSpeed = 0.15;
-    private Double angularSpeed = 0.15;
+    private Double def_linearSpeed = 0.15;
+    private Double def_angularSpeed = 0.15;
 
     private String msg = "";
 
@@ -68,8 +68,7 @@ public class MoveBaseActivity extends Activity {
                         timer.schedule(new TimerTask() {
                             @Override
                             public void run() {
-                                msg = "";
-                                changeLinearMessageAndSend(String.valueOf(linearSpeed));
+                                changeLinearMessageAndSend(String.valueOf(def_linearSpeed));
                             }
                         }, 0, 500);
                         break;
@@ -90,8 +89,7 @@ public class MoveBaseActivity extends Activity {
                         timer.schedule(new TimerTask() {
                             @Override
                             public void run() {
-                                msg = "";
-                                changeLinearMessageAndSend("-" + String.valueOf(linearSpeed));
+                                changeLinearMessageAndSend("-" + String.valueOf(def_linearSpeed));
                             }
                         }, 0, 500);
                         break;
@@ -112,8 +110,7 @@ public class MoveBaseActivity extends Activity {
                         timer.schedule(new TimerTask() {
                             @Override
                             public void run() {
-                                msg = "";
-                                changeAngularMessageAndSend(String.valueOf(angularSpeed));
+                                changeAngularMessageAndSend(String.valueOf(def_angularSpeed));
                             }
                         }, 0, 500);
                         break;
@@ -134,8 +131,7 @@ public class MoveBaseActivity extends Activity {
                         timer.schedule(new TimerTask() {
                             @Override
                             public void run() {
-                                msg = "";
-                                changeAngularMessageAndSend("-" + String.valueOf(angularSpeed));
+                                changeAngularMessageAndSend("-" + String.valueOf(def_angularSpeed));
                             }
                         }, 0, 500);
                         break;
@@ -150,8 +146,8 @@ public class MoveBaseActivity extends Activity {
         linear.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                linearSpeed = (progress * MAX_MOVEBASE_LINEARSPEED) / 100;
-                System.out.println(linearSpeed);
+                def_linearSpeed = (progress * MAX_MOVEBASE_LINEARSPEED) / 100;
+                System.out.println(def_linearSpeed);
             }
 
             @Override
@@ -166,7 +162,7 @@ public class MoveBaseActivity extends Activity {
         angular.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                angularSpeed = (progress * MAX_MOVEBASE_ANGULARSPEED) / 100;
+                def_angularSpeed = (progress * MAX_MOVEBASE_ANGULARSPEED) / 100;
             }
 
             @Override

@@ -20,8 +20,8 @@ public class HeadActivity extends Activity {
 
     private ROSBridgeClient client;
 
-    private Double linearSpeed = 2.5;
-    private Double angularSpeed = 15.0;
+    private Double def_linearSpeed = 2.5;
+    private Double def_angularSpeed = 15.0;
 
     private String msg = "";
 
@@ -37,8 +37,6 @@ public class HeadActivity extends Activity {
     private Button right;
     private SeekBar linear;
     private SeekBar angular;
-
-    private Timer timer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -65,20 +63,29 @@ public class HeadActivity extends Activity {
 
     private void setListener() {
         up.setOnTouchListener(new View.OnTouchListener() {
+
+            Timer timer;
+            TimerTask timerTask;
+
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 switch (event.getAction()) {
                     case MotionEvent.ACTION_DOWN:
                         timer = new Timer();
-                        timer.schedule(new TimerTask() {
+                        timerTask = new TimerTask() {
                             @Override
                             public void run() {
-                                msg = "";
-                                changeLinearMessageAndSend(String.valueOf(linearSpeed));
+                                changeLinearMessageAndSend(String.valueOf(def_linearSpeed));
                             }
-                        }, 0, 500);
+                        };
+                        timer.schedule(timerTask, 0, 500);
                         break;
                     case MotionEvent.ACTION_UP:
+                        timerTask.cancel();
+                        if (timer != null) {
+                            timer.cancel();
+                            timer = null;
+                        }
                         stopMovemet();
                         break;
                 }
@@ -87,20 +94,27 @@ public class HeadActivity extends Activity {
         });
 
         down.setOnTouchListener(new View.OnTouchListener() {
+            Timer timer;
+            TimerTask timerTask;
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 switch (event.getAction()) {
                     case MotionEvent.ACTION_DOWN:
                         timer = new Timer();
-                        timer.schedule(new TimerTask() {
+                        timerTask = new TimerTask() {
                             @Override
                             public void run() {
-                                msg = "";
-                                changeLinearMessageAndSend("-" + String.valueOf(linearSpeed));
+                                changeLinearMessageAndSend("-" + String.valueOf(def_linearSpeed));
                             }
-                        }, 0, 500);
+                        };
+                        timer.schedule(timerTask, 0, 500);
                         break;
                     case MotionEvent.ACTION_UP:
+                        this.timerTask.cancel();
+                        if (timer != null) {
+                            timer.cancel();
+                            timer = null;
+                        }
                         stopMovemet();
                         break;
                 }
@@ -109,20 +123,27 @@ public class HeadActivity extends Activity {
         });
 
         left.setOnTouchListener(new View.OnTouchListener() {
+            Timer timer;
+            TimerTask timerTask;
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 switch (event.getAction()) {
                     case MotionEvent.ACTION_DOWN:
                         timer = new Timer();
-                        timer.schedule(new TimerTask() {
+                        timerTask = new TimerTask() {
                             @Override
                             public void run() {
-                                msg = "";
-                                changeAngularMessageAndSend("-" + String.valueOf(angularSpeed));
+                                changeAngularMessageAndSend("-" + String.valueOf(def_angularSpeed));
                             }
-                        }, 0, 500);
+                        };
+                        timer.schedule(timerTask, 0, 500);
                         break;
                     case MotionEvent.ACTION_UP:
+                        this.timerTask.cancel();
+                        if (timer != null) {
+                            timer.cancel();
+                            timer = null;
+                        }
                         stopMovemet();
                         break;
                 }
@@ -131,20 +152,27 @@ public class HeadActivity extends Activity {
         });
 
         right.setOnTouchListener(new View.OnTouchListener() {
+            Timer timer;
+            TimerTask timerTask;
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 switch (event.getAction()) {
                     case MotionEvent.ACTION_DOWN:
                         timer = new Timer();
-                        timer.schedule(new TimerTask() {
+                        timerTask = new TimerTask() {
                             @Override
                             public void run() {
-                                msg = "";
-                                changeAngularMessageAndSend(String.valueOf(angularSpeed));
+                                changeAngularMessageAndSend(String.valueOf(def_angularSpeed));
                             }
-                        }, 0, 500);
+                        };
+                        timer.schedule(timerTask, 0, 500);
                         break;
                     case MotionEvent.ACTION_UP:
+                        this.timerTask.cancel();
+                        if (timer != null) {
+                            timer.cancel();
+                            timer = null;
+                        }
                         stopMovemet();
                         break;
                 }
@@ -155,7 +183,7 @@ public class HeadActivity extends Activity {
         linear.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                linearSpeed = progress / 100 * MAX_HEAD_LINEARSPEED;
+                def_linearSpeed = progress / 100 * MAX_HEAD_LINEARSPEED;
             }
 
             @Override
@@ -170,7 +198,7 @@ public class HeadActivity extends Activity {
         angular.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                angularSpeed = progress / 100 * MAX_HEAD_ANGULARSPEED;
+                def_angularSpeed = progress / 100 * MAX_HEAD_ANGULARSPEED;
             }
 
             @Override
@@ -184,10 +212,6 @@ public class HeadActivity extends Activity {
     }
 
     private void stopMovemet() {
-        if (timer != null) {
-            timer.cancel();
-            timer = null;
-        }
         msg = "\"linear\":{\"x\":0,\"y\":0,\"z\":0},\"angular\":{\"x\":0,\"y\":0,\"z\":0}";
         sendMsgToTopic(msg);
     }
