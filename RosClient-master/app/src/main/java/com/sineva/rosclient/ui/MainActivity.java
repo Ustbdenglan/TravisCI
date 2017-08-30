@@ -8,8 +8,8 @@ import android.view.View;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.jilk.ros.ROSClient;
-import com.jilk.ros.rosbridge.ROSBridgeClient;
+import com.roslibrary.ros.ROSClient;
+import com.roslibrary.ros.rosbridge.ROSBridgeClient;
 import com.sineva.rosclient.R;
 import com.sineva.rosclient.RCApplication;
 

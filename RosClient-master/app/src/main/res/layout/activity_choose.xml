@@ -7,25 +7,27 @@
     tools:context="net.xxhong.rosclient.ui.ChooseActivity">
 
     <Button
-        android:id="@+id/button6"
+        android:id="@+id/btn_move_base"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="122dp"
+        android:onClick="onMoveBaseClick"
         android:text="chassis"
         tools:layout_editor_absoluteX="153dp"
-        tools:layout_editor_absoluteY="66dp"
-        android:layout_marginTop="122dp"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true" />
+        tools:layout_editor_absoluteY="66dp" />
 
     <Button
-        android:id="@+id/button7"
+        android:id="@+id/btn_head"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:layout_below="@+id/btn_move_base"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="125dp"
+        android:onClick="onHeadClick"
         android:text="head"
         tools:layout_editor_absoluteX="153dp"
-        tools:layout_editor_absoluteY="153dp"
-        android:layout_marginTop="125dp"
-        android:layout_below="@+id/button6"
-        android:layout_centerHorizontal="true" />
+        tools:layout_editor_absoluteY="153dp" />
 
 </RelativeLayout>

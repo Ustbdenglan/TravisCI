@@ -19,7 +19,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name=".ui.ChassisActivity" />
+        <activity android:name=".ui.MoveBaseActivity" />
         <activity android:name=".ui.HeadActivity" />
         <activity android:name=".ui.ChooseActivity"></activity>
     </application>
