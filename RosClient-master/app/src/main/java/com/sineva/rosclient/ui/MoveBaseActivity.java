@@ -70,7 +70,7 @@ public class MoveBaseActivity extends Activity {
                             public void run() {
                                 changeLinearMessageAndSend(String.valueOf(def_linearSpeed));
                             }
-                        }, 0, 500);
+                        }, 0, 550);
                         break;
                     case MotionEvent.ACTION_UP:
                         stopMovemet();
@@ -91,7 +91,7 @@ public class MoveBaseActivity extends Activity {
                             public void run() {
                                 changeLinearMessageAndSend("-" + String.valueOf(def_linearSpeed));
                             }
-                        }, 0, 500);
+                        }, 0, 550);
                         break;
                     case MotionEvent.ACTION_UP:
                         stopMovemet();
@@ -112,7 +112,7 @@ public class MoveBaseActivity extends Activity {
                             public void run() {
                                 changeAngularMessageAndSend(String.valueOf(def_angularSpeed));
                             }
-                        }, 0, 500);
+                        }, 0, 550);
                         break;
                     case MotionEvent.ACTION_UP:
                         stopMovemet();
@@ -133,7 +133,7 @@ public class MoveBaseActivity extends Activity {
                             public void run() {
                                 changeAngularMessageAndSend("-" + String.valueOf(def_angularSpeed));
                             }
-                        }, 0, 500);
+                        }, 0, 550);
                         break;
                     case MotionEvent.ACTION_UP:
                         stopMovemet();

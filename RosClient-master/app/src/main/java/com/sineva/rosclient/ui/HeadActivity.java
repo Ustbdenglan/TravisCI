@@ -38,6 +38,8 @@ public class HeadActivity extends Activity {
     private SeekBar linear;
     private SeekBar angular;
 
+    private Timer timer;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -63,29 +65,19 @@ public class HeadActivity extends Activity {
 
     private void setListener() {
         up.setOnTouchListener(new View.OnTouchListener() {
-
-            Timer timer;
-            TimerTask timerTask;
-
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 switch (event.getAction()) {
                     case MotionEvent.ACTION_DOWN:
                         timer = new Timer();
-                        timerTask = new TimerTask() {
+                        timer.schedule(new TimerTask() {
                             @Override
                             public void run() {
                                 changeLinearMessageAndSend(String.valueOf(def_linearSpeed));
                             }
-                        };
-                        timer.schedule(timerTask, 0, 500);
+                        }, 0, 550);
                         break;
                     case MotionEvent.ACTION_UP:
-                        timerTask.cancel();
-                        if (timer != null) {
-                            timer.cancel();
-                            timer = null;
-                        }
                         stopMovemet();
                         break;
                 }
@@ -94,27 +86,19 @@ public class HeadActivity extends Activity {
         });
 
         down.setOnTouchListener(new View.OnTouchListener() {
-            Timer timer;
-            TimerTask timerTask;
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 switch (event.getAction()) {
                     case MotionEvent.ACTION_DOWN:
                         timer = new Timer();
-                        timerTask = new TimerTask() {
+                        timer.schedule(new TimerTask() {
                             @Override
                             public void run() {
                                 changeLinearMessageAndSend("-" + String.valueOf(def_linearSpeed));
                             }
-                        };
-                        timer.schedule(timerTask, 0, 500);
+                        }, 0, 550);
                         break;
                     case MotionEvent.ACTION_UP:
-                        this.timerTask.cancel();
-                        if (timer != null) {
-                            timer.cancel();
-                            timer = null;
-                        }
                         stopMovemet();
                         break;
                 }
@@ -123,27 +107,19 @@ public class HeadActivity extends Activity {
         });
 
         left.setOnTouchListener(new View.OnTouchListener() {
-            Timer timer;
-            TimerTask timerTask;
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 switch (event.getAction()) {
                     case MotionEvent.ACTION_DOWN:
                         timer = new Timer();
-                        timerTask = new TimerTask() {
+                        timer.schedule(new TimerTask() {
                             @Override
                             public void run() {
                                 changeAngularMessageAndSend("-" + String.valueOf(def_angularSpeed));
                             }
-                        };
-                        timer.schedule(timerTask, 0, 500);
+                        }, 0, 550);
                         break;
                     case MotionEvent.ACTION_UP:
-                        this.timerTask.cancel();
-                        if (timer != null) {
-                            timer.cancel();
-                            timer = null;
-                        }
                         stopMovemet();
                         break;
                 }
@@ -152,27 +128,19 @@ public class HeadActivity extends Activity {
         });
 
         right.setOnTouchListener(new View.OnTouchListener() {
-            Timer timer;
-            TimerTask timerTask;
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 switch (event.getAction()) {
                     case MotionEvent.ACTION_DOWN:
                         timer = new Timer();
-                        timerTask = new TimerTask() {
+                        timer.schedule(new TimerTask() {
                             @Override
                             public void run() {
                                 changeAngularMessageAndSend(String.valueOf(def_angularSpeed));
                             }
-                        };
-                        timer.schedule(timerTask, 0, 500);
+                        }, 0, 550);
                         break;
                     case MotionEvent.ACTION_UP:
-                        this.timerTask.cancel();
-                        if (timer != null) {
-                            timer.cancel();
-                            timer = null;
-                        }
                         stopMovemet();
                         break;
                 }
@@ -212,6 +180,10 @@ public class HeadActivity extends Activity {
     }
 
     private void stopMovemet() {
+        if (timer != null) {
+            timer.cancel();
+            timer = null;
+        }
         msg = "\"linear\":{\"x\":0,\"y\":0,\"z\":0},\"angular\":{\"x\":0,\"y\":0,\"z\":0}";
         sendMsgToTopic(msg);
     }
