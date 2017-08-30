@@ -151,7 +151,7 @@ public class HeadActivity extends Activity {
         linear.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                def_linearSpeed = progress / 100 * MAX_HEAD_LINEARSPEED;
+                def_linearSpeed = (progress * MAX_HEAD_LINEARSPEED) / 100;
             }
 
             @Override
@@ -166,7 +166,7 @@ public class HeadActivity extends Activity {
         angular.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                def_angularSpeed = progress / 100 * MAX_HEAD_ANGULARSPEED;
+                def_angularSpeed = (progress * MAX_HEAD_ANGULARSPEED) / 100;
             }
 
             @Override
