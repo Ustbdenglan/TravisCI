@@ -16,23 +16,20 @@ import java.util.Timer;
 import java.util.TimerTask;
 
 
-public class HeadActivity extends Activity {
+public class MoveBaseActivity extends Activity {
 
     private ROSBridgeClient client;
 
-    private Double def_linearSpeed = 2.5;
-    private Double def_angularSpeed = 15.0;
+    private Double def_linearSpeed = 0.15;
+    private Double def_angularSpeed = 0.15;
 
     private String msg = "";
 
-    private final static Double MAX_HEAD_LINEARSPEED = 5.0;
-    private final static Double MAX_HEAD_ANGULARSPEED = 30.0;
+    private final static Double MAX_MOVEBASE_LINEARSPEED = 0.3;
+    private final static Double MAX_MOVEBASE_ANGULARSPEED = 0.3;
 
-    private final static String HEAD_BUTTON_TEXT_UP = "up";
-    private final static String HEAD_BUTTON_TEXT_DOWN = "down";
-
-    private Button up;
-    private Button down;
+    private Button forward;
+    private Button backward;
     private Button left;
     private Button right;
     private SeekBar linear;
@@ -45,16 +42,14 @@ public class HeadActivity extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_nodes);
 
-        up = (Button) findViewById(R.id.btn_forward);
-        up.setText(HEAD_BUTTON_TEXT_UP);
-        down = (Button) findViewById(R.id.btn_backward);
-        down.setText(HEAD_BUTTON_TEXT_DOWN);
+        forward = (Button) findViewById(R.id.btn_forward);
+        backward = (Button) findViewById(R.id.btn_backward);
         left = (Button) findViewById(R.id.btn_left);
         right = (Button) findViewById(R.id.btn_right);
         linear = (SeekBar) findViewById(R.id.sb_linear);
         angular = (SeekBar) findViewById(R.id.sb_angular);
         TextView tvLinear = (TextView) findViewById(R.id.tv_linear);
-        tvLinear.setText("Cabrage Speed");
+        tvLinear.setText("Forward Speed");
         TextView tvAngular = (TextView) findViewById(R.id.tv_angular);
         tvAngular.setText("Rotate Speed");
 
@@ -64,7 +59,7 @@ public class HeadActivity extends Activity {
     }
 
     private void setListener() {
-        up.setOnTouchListener(new View.OnTouchListener() {
+        forward.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 switch (event.getAction()) {
@@ -85,7 +80,7 @@ public class HeadActivity extends Activity {
             }
         });
 
-        down.setOnTouchListener(new View.OnTouchListener() {
+        backward.setOnTouchListener(new View.OnTouchListener() {
             @Override
             public boolean onTouch(View v, MotionEvent event) {
                 switch (event.getAction()) {
@@ -115,7 +110,7 @@ public class HeadActivity extends Activity {
                         timer.schedule(new TimerTask() {
                             @Override
                             public void run() {
-                                changeAngularMessageAndSend("-" + String.valueOf(def_angularSpeed));
+                                changeAngularMessageAndSend(String.valueOf(def_angularSpeed));
                             }
                         }, 0, 550);
                         break;
@@ -136,7 +131,7 @@ public class HeadActivity extends Activity {
                         timer.schedule(new TimerTask() {
                             @Override
                             public void run() {
-                                changeAngularMessageAndSend(String.valueOf(def_angularSpeed));
+                                changeAngularMessageAndSend("-" + String.valueOf(def_angularSpeed));
                             }
                         }, 0, 550);
                         break;
@@ -151,7 +146,7 @@ public class HeadActivity extends Activity {
         linear.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                def_linearSpeed = (progress * MAX_HEAD_LINEARSPEED) / 100;
+                def_linearSpeed = (progress * MAX_MOVEBASE_LINEARSPEED) / 100;
             }
 
             @Override
@@ -166,7 +161,7 @@ public class HeadActivity extends Activity {
         angular.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                def_angularSpeed = (progress * MAX_HEAD_ANGULARSPEED) / 100;
+                def_angularSpeed = (progress * MAX_MOVEBASE_ANGULARSPEED) / 100;
             }
 
             @Override
@@ -189,7 +184,7 @@ public class HeadActivity extends Activity {
     }
 
     private void sendMsgToTopic(String msg) {
-        client.send("{\"op\":\"publish\",\"topic\":\"/joy_teleop/cmd_vel_head\",\"msg\":{" + msg + "}}");
+        client.send("{\"op\":\"publish\",\"topic\":\"/joy_teleop/cmd_vel_base\",\"msg\":{" + msg + "}}");
     }
 
     private void changeLinearMessageAndSend(String strLinearSpeed) {

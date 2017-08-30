@@ -2,7 +2,7 @@ package com.sineva.rosclient;
 
 import android.app.Application;
 
-import com.jilk.ros.rosbridge.ROSBridgeClient;
+import com.roslibrary.ros.rosbridge.ROSBridgeClient;
 
 
 public class RCApplication extends Application {
@@ -15,7 +15,7 @@ public class RCApplication extends Application {
 
     @Override
     public void onTerminate() {
-        if(client != null)
+        if (client != null)
             client.disconnect();
         super.onTerminate();
     }
