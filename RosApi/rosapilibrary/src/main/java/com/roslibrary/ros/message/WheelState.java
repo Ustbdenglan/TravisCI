@@ -14,7 +14,7 @@ public class WheelState {
     public static class MsgBean {
 
         public HeaderBean header;
-        public List<Integer> velocity;
+        public List<Float> velocity;
         public List<Integer> effort;
         public List<String> name;
         public List<Double> position;

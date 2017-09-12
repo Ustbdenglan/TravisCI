@@ -120,6 +120,7 @@ public class RosApiClient {
                 break;
             case "/joint_states":
                 mWheelState = mGson.fromJson(message.originMsg, WheelState.class);
+
                 break;
         }
     }

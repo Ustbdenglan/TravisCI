@@ -13,11 +13,10 @@ import java.util.TimerTask;
 public class WheelStateActivity extends MainActivity {
 
     private TextView mTvLeftWheelVelocity;
-    private TextView mTvRigheWheelVelocity;
+    private TextView mTvRightWheelVelocity;
 
     private RosApiClient mRosApiClientInstance;
 
-    private Integer mVelocity;
     private WheelState mWheelState;
 
     @Override
@@ -44,7 +43,7 @@ public class WheelStateActivity extends MainActivity {
             @Override
             public void run() {
                 mTvLeftWheelVelocity.setText(String.valueOf(mWheelState.msg.velocity.get(0)));
-                mTvRigheWheelVelocity.setText(String.valueOf(mWheelState.msg.velocity.get(1)));
+                mTvRightWheelVelocity.setText(String.valueOf(mWheelState.msg.velocity.get(1)));
             }
         });
     }
