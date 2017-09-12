@@ -71,4 +71,36 @@
         android:onClick="onCameraClick"
         android:text="Camera" />
 
+    <Button
+        android:id="@+id/button"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/btn_map"
+        android:layout_marginTop="22dp"
+        android:layout_toLeftOf="@+id/btn_camera"
+        android:layout_toStartOf="@+id/btn_camera"
+        android:onClick="onWheelStateClick"
+        android:text="WheelState" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/button"
+        android:layout_toEndOf="@+id/btn_battery_voltage"
+        android:layout_toRightOf="@+id/btn_battery_voltage"
+        android:onClick="onMobileBaseControllerClick"
+        android:text="MobileBaseController" />
+
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/button"
+        android:layout_alignRight="@+id/button"
+        android:layout_below="@+id/button2"
+        android:layout_marginTop="17dp"
+        android:onClick="onChestButtonClick"
+        android:text="ChestButton" />
+
 </RelativeLayout>

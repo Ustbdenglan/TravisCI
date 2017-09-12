@@ -1,29 +1,23 @@
-package com.sineva.entity;
+package com.roslibrary.ros.message;
 
 import java.util.List;
 
 /**
- * Created by Eligah on 2017/8/31.
+ * Created by Eligah on 2017/9/12.
  */
 
-public class LidarData {
-
+public class WheelState {
     public String topic;
     public MsgBean msg;
     public String op;
 
     public static class MsgBean {
 
-        public double angle_min;
-        public double range_min;
-        public double scan_time;
-        public int range_max;
-        public double angle_increment;
-        public double angle_max;
         public HeaderBean header;
-        public double time_increment;
-        public List<Float> ranges;
-        public List<Integer> intensities;
+        public List<Integer> velocity;
+        public List<Integer> effort;
+        public List<String> name;
+        public List<Double> position;
 
         public static class HeaderBean {
 

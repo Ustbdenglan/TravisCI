@@ -29,9 +29,9 @@ dependencies {
     compile 'com.android.support:appcompat-v7:26.+'
     testCompile 'junit:junit:4.12'
     compile files('libs/eventbus.jar')
+    compile files('libs/gson-2.8.0.jar')
     compile files('libs/java_websocket.jar')
     compile files('libs/json-simple-1.1.jar')
-    compile files('libs/gson-2.8.0.jar')
 }
 
 task makeJar(type: Copy) {

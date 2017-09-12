@@ -7,6 +7,7 @@ import com.roslibrary.ros.rosbridge.operation.Operation;
  */
 
 public class PublishEvent {
+    public String originMsg;
     public String msg;
     public String id;
     public String name;
@@ -14,11 +15,16 @@ public class PublishEvent {
 
 
     public PublishEvent(Operation operation, String name, String content) {
+
+    }
+
+    public PublishEvent(String message, Operation operation, String name, String content) {
         if (null != operation) {
             id = operation.id;
             op = operation.op;
         }
         this.name = name;
         msg = content;
+        originMsg = message;
     }
 }

@@ -1,8 +1,8 @@
-package com.sineva.entity;
+package com.roslibrary.ros.message;
 
 import java.util.List;
 
-public class BatteryAndSonarState {
+public class AimrPowerState {
 
     public String topic;
     public MsgBean msg;
