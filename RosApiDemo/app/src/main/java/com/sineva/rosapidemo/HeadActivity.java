@@ -1,4 +1,4 @@
-package com.sineva.myapplication;
+package com.sineva.rosapidemo;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -8,7 +8,7 @@ import android.widget.Button;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
-import com.sineva.implementation.HeadClient;
+import com.roslibrary.ros.RosApiClient;
 
 
 public class HeadActivity extends Activity {
@@ -23,8 +23,7 @@ public class HeadActivity extends Activity {
     private Button down;
     private SeekBar linear;
     private SeekBar angular;
-
-    private HeadClient mHeadClient;
+    private RosApiClient mRosApiClientInstance;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -33,7 +32,7 @@ public class HeadActivity extends Activity {
 
         Intent intent = getIntent();
 
-        mHeadClient = HeadClient.getHeadClientInstance(intent.getStringExtra("ip"), intent.getStringExtra("port"), this);
+        mRosApiClientInstance = RosApiClient.getRosApiClientInstance();
 
         up = (Button) findViewById(R.id.btn_forward);
         up.setText(HEAD_BUTTON_TEXT_UP);
@@ -54,7 +53,7 @@ public class HeadActivity extends Activity {
         linear.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                mHeadClient.setMaxCabrageSpeed(progress * MAX_HEAD_LINEARSPEED / 100);
+                mRosApiClientInstance.setHeadCabrageSpeed(progress * MAX_HEAD_LINEARSPEED / 100);
             }
 
             @Override
@@ -69,7 +68,7 @@ public class HeadActivity extends Activity {
         angular.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                mHeadClient.setMaxRollSpeed(progress * MAX_HEAD_ANGULARSPEED / 100);
+                mRosApiClientInstance.setHeadRollSpeed(progress * MAX_HEAD_ANGULARSPEED / 100);
             }
 
             @Override
@@ -83,22 +82,22 @@ public class HeadActivity extends Activity {
     }
 
     public void onStopClick(View view) {
-        mHeadClient.stopMovemet();
+        mRosApiClientInstance.stopHeadMovemet();
     }
 
     public void onForwardClick(View view) {
-        mHeadClient.up();
+        mRosApiClientInstance.headUp();
     }
 
     public void onBackwardClick(View view) {
-        mHeadClient.down();
+        mRosApiClientInstance.headDown();
     }
 
     public void onLeftClick(View view) {
-        mHeadClient.left();
+        mRosApiClientInstance.headTurnLeft();
     }
 
     public void onRightClick(View view) {
-        mHeadClient.right();
+        mRosApiClientInstance.headTurnRight();
     }
 }

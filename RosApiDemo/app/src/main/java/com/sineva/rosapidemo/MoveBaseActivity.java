@@ -1,4 +1,4 @@
-package com.sineva.myapplication;
+package com.sineva.rosapidemo;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -7,7 +7,7 @@ import android.view.View;
 import android.widget.SeekBar;
 import android.widget.TextView;
 
-import com.sineva.implementation.MoveBaseClient;
+import com.roslibrary.ros.RosApiClient;
 
 
 public class MoveBaseActivity extends Activity {
@@ -17,8 +17,7 @@ public class MoveBaseActivity extends Activity {
 
     private SeekBar linear;
     private SeekBar angular;
-
-    private MoveBaseClient mMoveBaseClient;
+    private RosApiClient mRosApiClientInstance;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -27,7 +26,7 @@ public class MoveBaseActivity extends Activity {
 
         Intent intent = getIntent();
 
-        mMoveBaseClient = MoveBaseClient.getMoveBaseClientInstance(intent.getStringExtra("ip"), intent.getStringExtra("port"), this);
+        mRosApiClientInstance = RosApiClient.getRosApiClientInstance();
 
         linear = (SeekBar) findViewById(R.id.sb_linear);
         angular = (SeekBar) findViewById(R.id.sb_angular);
@@ -37,7 +36,6 @@ public class MoveBaseActivity extends Activity {
         tvAngular.setText("Rotate Speed");
 
         setListener();
-
     }
 
     private void setListener() {
@@ -45,7 +43,7 @@ public class MoveBaseActivity extends Activity {
         linear.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                mMoveBaseClient.setMaxCabrageSpeed((progress * MAX_MOVEBASE_LINEARSPEED) / 100);
+                mRosApiClientInstance.setMoveBaseCabrageSpeed((progress * MAX_MOVEBASE_LINEARSPEED) / 100);
             }
 
             @Override
@@ -60,7 +58,7 @@ public class MoveBaseActivity extends Activity {
         angular.setOnSeekBarChangeListener(new SeekBar.OnSeekBarChangeListener() {
             @Override
             public void onProgressChanged(SeekBar seekBar, int progress, boolean fromUser) {
-                mMoveBaseClient.setMaxRollSpeed(progress * MAX_MOVEBASE_ANGULARSPEED / 100);
+                mRosApiClientInstance.setMoveBaseRollSpeed(progress * MAX_MOVEBASE_ANGULARSPEED / 100);
             }
 
             @Override
@@ -74,22 +72,22 @@ public class MoveBaseActivity extends Activity {
     }
 
     public void onStopClick(View view) {
-        mMoveBaseClient.stopMovemet();
+        mRosApiClientInstance.stopMoveBaseMovemet();
     }
 
     public void onForwardClick(View view) {
-        mMoveBaseClient.forward();
+        mRosApiClientInstance.robotForward();
     }
 
     public void onBackwardClick(View view) {
-        mMoveBaseClient.backward();
+        mRosApiClientInstance.robotBackward();
     }
 
     public void onLeftClick(View view) {
-        mMoveBaseClient.left();
+        mRosApiClientInstance.robotTurnLeft();
     }
 
     public void onRightClick(View view) {
-        mMoveBaseClient.right();
+        mRosApiClientInstance.robotTurnRight();
     }
 }

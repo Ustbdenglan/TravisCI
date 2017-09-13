@@ -21,6 +21,5 @@ package com.roslibrary.ros.rosapi.message;
 import com.roslibrary.ros.message.Message;
 import com.roslibrary.ros.message.MessageType;
 
-@MessageType(string = "std_msgs/Empty")
 public class Empty extends Message {
 }

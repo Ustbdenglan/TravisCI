@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.sineva.myapplication">
+    package="com.sineva.rosapidemo">
 
     <uses-permission android:name="android.permission.INTERNET" />
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
@@ -19,13 +19,15 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-        <activity android:name="com.sineva.myapplication.MoveBaseActivity" />
-        <activity android:name="com.sineva.myapplication.HeadActivity" />
-        <activity android:name="com.sineva.myapplication.ChooseActivity" />
-        <activity android:name="com.sineva.myapplication.BatteryAndSonarActivity" />
-        <activity android:name="com.sineva.myapplication.LidarActivity" />
-        <activity android:name="com.sineva.myapplication.MapActivity" />
-        <activity android:name="com.sineva.myapplication.CameraActivity" />
+        <activity android:name="com.sineva.rosapidemo.ChooseActivity" />
+        <activity android:name="com.sineva.rosapidemo.BatteryAndSonarActivity" />
+        <activity android:name="com.sineva.rosapidemo.MoveBaseActivity" />
+        <activity android:name="com.sineva.rosapidemo.HeadActivity" />
+        <activity android:name="com.sineva.rosapidemo.MapActivity" />
+        <activity android:name="com.sineva.rosapidemo.LidarActivity" />
+        <activity android:name="com.sineva.rosapidemo.ChestButtonActivity" />
+        <activity android:name="com.sineva.rosapidemo.MobileBaseControllerActivity" />
+        <activity android:name="com.sineva.rosapidemo.WheelStateActivity" />
     </application>
 
 </manifest>

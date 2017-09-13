@@ -1,4 +1,4 @@
-package com.sineva.entity;
+package com.roslibrary.ros.message;
 
 import java.util.List;
 
@@ -6,7 +6,7 @@ import java.util.List;
  * Created by Eligah on 2017/8/31.
  */
 
-public class LidarData {
+public class LaserScan {
 
     public String topic;
     public MsgBean msg;

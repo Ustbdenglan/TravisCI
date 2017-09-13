@@ -20,10 +20,8 @@ package com.roslibrary.ros.rosapi.message;
 
 import com.roslibrary.ros.message.Message;
 import com.roslibrary.ros.message.MessageType;
-import com.roslibrary.ros.message.TimePrimitive;
 
 
 @MessageType(string = "rosapi/GetTimeResponse")
 public class GetTime extends Message {
-    public TimePrimitive time;
 }

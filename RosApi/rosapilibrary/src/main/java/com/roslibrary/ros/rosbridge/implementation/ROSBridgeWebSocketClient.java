@@ -105,20 +105,15 @@ public class ROSBridgeWebSocketClient extends WebSocketClient {
             if (debug)
                 System.out.println("No handler: id# " + operation.id + ", op:" + operation.op);
             if (operation instanceof Publish) {
-                //start lijingyuan 2017.08.31
-                EventBus.getDefault().post(message);
-                //end lijingyuan 2017.08.31
                 Publish publish = ((Publish) operation);
                 JSONParser jsonParser = new JSONParser();
                 try {
                     JSONObject jsonObject = (JSONObject) jsonParser.parse(message);
                     String content = jsonObject.get("msg").toString();
-                    EventBus.getDefault().post(new PublishEvent(operation, publish.topic, content));
+                    EventBus.getDefault().post(new PublishEvent(message, operation, publish.topic, content));
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }
-
-                //System.out.println("Publish " + publish.topic);
             } else if (operation instanceof ServiceResponse) {
                 ServiceResponse serviceResponse = ((ServiceResponse) operation);
                 JSONParser jsonParser = new JSONParser();

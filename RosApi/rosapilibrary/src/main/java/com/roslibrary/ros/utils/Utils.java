@@ -1,4 +1,4 @@
-package com.sineva.utils;
+package com.roslibrary.ros.utils;
 
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
