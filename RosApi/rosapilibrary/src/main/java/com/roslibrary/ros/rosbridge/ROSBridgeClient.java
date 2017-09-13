@@ -22,14 +22,14 @@ import com.roslibrary.ros.ROSClient;
 import com.roslibrary.ros.Service;
 import com.roslibrary.ros.message.Message;
 import com.roslibrary.ros.message.MessageType;
-import com.roslibrary.ros.rosapi.message.Empty;
-import com.roslibrary.ros.rosapi.message.MessageDetails;
-import com.roslibrary.ros.rosapi.message.Nodes;
-import com.roslibrary.ros.rosapi.message.Services;
-import com.roslibrary.ros.rosapi.message.Topic;
-import com.roslibrary.ros.rosapi.message.Topics;
-import com.roslibrary.ros.rosapi.message.Type;
-import com.roslibrary.ros.rosapi.message.TypeDef;
+import com.roslibrary.ros.rosapi.responsetype.Empty;
+import com.roslibrary.ros.rosapi.responsetype.MessageDetails;
+import com.roslibrary.ros.rosapi.responsetype.Nodes;
+import com.roslibrary.ros.rosapi.responsetype.Services;
+import com.roslibrary.ros.rosapi.responsetype.Topic;
+import com.roslibrary.ros.rosapi.responsetype.Topics;
+import com.roslibrary.ros.rosapi.responsetype.Type;
+import com.roslibrary.ros.rosapi.responsetype.TypeDef;
 import com.roslibrary.ros.rosbridge.implementation.ROSBridgeWebSocketClient;
 import com.roslibrary.ros.rosbridge.operation.Operation;
 
@@ -181,10 +181,10 @@ public class ROSBridgeClient extends ROSClient {
     }
 
     private String getServiceType(String service) throws InterruptedException {
-        Service<com.roslibrary.ros.rosapi.message.Service, Type> serviceTypeService =
-                new Service<com.roslibrary.ros.rosapi.message.Service, Type>("/rosapi/service_type",
-                        com.roslibrary.ros.rosapi.message.Service.class, Type.class, this);
-        return serviceTypeService.callBlocking(new com.roslibrary.ros.rosapi.message.Service(service)).type;
+        Service<com.roslibrary.ros.rosapi.responsetype.Service, Type> serviceTypeService =
+                new Service<com.roslibrary.ros.rosapi.responsetype.Service, Type>("/rosapi/service_type",
+                        com.roslibrary.ros.rosapi.responsetype.Service.class, Type.class, this);
+        return serviceTypeService.callBlocking(new com.roslibrary.ros.rosapi.responsetype.Service(service)).type;
     }
 
     private TypeDef findType(String type, TypeDef[] types) {

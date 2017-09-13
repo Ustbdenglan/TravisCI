@@ -5,8 +5,9 @@ import android.util.Log;
 import com.google.gson.Gson;
 import com.roslibrary.ros.entity.PublishEvent;
 import com.roslibrary.ros.message.AimrPowerState;
-import com.roslibrary.ros.message.ChestButton;
+import com.roslibrary.ros.message.ButtonState;
 import com.roslibrary.ros.message.LaserScan;
+import com.roslibrary.ros.message.LedState;
 import com.roslibrary.ros.message.MobileBaseController;
 import com.roslibrary.ros.message.WheelState;
 import com.roslibrary.ros.rosbridge.ROSBridgeClient;
@@ -43,11 +44,13 @@ public class RosApiClient {
     private AimrPowerState mAimrPowerState;
     private LaserScan mLaserData;
     private MobileBaseController mMobileBaseController;
-    private ChestButton mChestButtonState;
     private WheelState mWheelState;
+    private LedState mLedState;
+    private ButtonState mButtonState;
 
     private Timer mTimer;
     private String mHeadMsg;
+    private String mResult;
 
     public static RosApiClient getRosApiClientInstance() {
         if (mRosApiClient == null) {
@@ -60,13 +63,13 @@ public class RosApiClient {
         return mRosApiClient;
     }
 
-    public void initClient(String ip, String port) {
-        connect(ip, port);
+    public String initClient(String ip, String port) {
         Log.e(Constants.TAG, "IP = " + ip + ", PORT = " + port);
+        return connect(ip, port);
     }
 
     //connect the websocket
-    private void connect(String ip, String port) {
+    private String connect(String ip, String port) {
         mClient = new ROSBridgeClient("ws://" + ip + ":" + port);
         mClient.connect(new com.roslibrary.ros.ROSClient.ConnectionStatusListener() {
             @Override
@@ -78,7 +81,9 @@ public class RosApiClient {
                 mClient.send(Constants.SUBSCRIBE_ODOMETER_TOPIC);
                 mClient.send(Constants.SUBSCRIBE_WHEEL_SPEED_TOPIC);
                 mClient.send(Constants.SUBSCRIBE_CAMERA_TOPIC);
+                mClient.send(Constants.SUBSCRIBE_LED_TOPIC);
                 EventBus.getDefault().register(RosApiClient.this);
+                mResult = "Connect ROS success";
                 Log.e(Constants.TAG, "Connect ROS success");
             }
 
@@ -93,6 +98,7 @@ public class RosApiClient {
                 Log.e(Constants.TAG, "ROS communication error");
             }
         });
+        return mResult;
     }
 
     //receive the data from rosbridge
@@ -114,13 +120,14 @@ public class RosApiClient {
             case "/usb_cam/image_raw/compressed":
                 mImageRawCompressedData = message.msg;
                 break;
-            case "/aimr_state":
-                String msgChestButtonData = message.originMsg.replaceAll("\\\\\"", "\"").replaceAll("\"data:", "").replaceAll("\\}\"\\}", "\\}\\}");
-                mChestButtonState = mGson.fromJson(msgChestButtonData, ChestButton.class);
+            case "/aimr_power/btn_state":
+                mButtonState = mGson.fromJson(message.originMsg, ButtonState.class);
                 break;
-            case "/joint_states":
+            case "/aimr_power/led_state":
+                mLedState = mGson.fromJson(message.originMsg, LedState.class);
+                break;
+            case "/joint_states_throttle":
                 mWheelState = mGson.fromJson(message.originMsg, WheelState.class);
-
                 break;
         }
     }
@@ -145,8 +152,12 @@ public class RosApiClient {
         return mImageRawCompressedData;
     }
 
-    public ChestButton getChestButtonState() {
-        return mChestButtonState;
+    public ButtonState getChestButtonState() {
+        return mButtonState;
+    }
+
+    public LedState getLedState() {
+        return mLedState;
     }
 
     public WheelState getWheelState() {
@@ -314,7 +325,7 @@ public class RosApiClient {
         mClient.send(Constants.UNSUBSCRIBE_ODOMETER_TOPIC);
         mClient.send(Constants.UNSUBSCRIBE_KEY_TOPIC);
         mClient.send(Constants.UNSUBSCRIBE_WHEEL_SPEED_TOPIC);
-        EventBus.getDefault().unregister(this);
+        mClient.send(Constants.UNSUBSCRIBE_LED_TOPIC);
         mClient.disconnect();
     }
 }

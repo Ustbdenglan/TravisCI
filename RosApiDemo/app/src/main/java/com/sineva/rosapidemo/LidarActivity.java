@@ -38,22 +38,24 @@ public class LidarActivity extends Activity {
             public void run() {
                 showLaserScan();
             }
-        }, 3000, 50);
+        }, 0, 50);
     }
 
     private void showLaserScan() {
         mLaserScanData = mRosApiClientInstance.getLaserScanData();
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                root.removeView(lidarView);
-                tvSecs.setText(Integer.toString(mLaserScanData.msg.header.stamp.secs));
-                tvNsecs.setText(Integer.toString(mLaserScanData.msg.header.stamp.nsecs));
-                List<Float> ranges = mLaserScanData.msg.ranges;
-                lidarView.setdata(ranges);
-                lidarView.invalidate();
-                root.addView(lidarView);
-            }
-        });
+        if (null != mLaserScanData) {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    root.removeView(lidarView);
+                    tvSecs.setText(Integer.toString(mLaserScanData.msg.header.stamp.secs));
+                    tvNsecs.setText(Integer.toString(mLaserScanData.msg.header.stamp.nsecs));
+                    List<Float> ranges = mLaserScanData.msg.ranges;
+                    lidarView.setdata(ranges);
+                    lidarView.invalidate();
+                    root.addView(lidarView);
+                }
+            });
+        }
     }
 }

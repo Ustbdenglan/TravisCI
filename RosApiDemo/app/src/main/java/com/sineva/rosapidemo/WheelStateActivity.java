@@ -34,17 +34,19 @@ public class WheelStateActivity extends MainActivity {
             public void run() {
                 showVelocity();
             }
-        }, 3000, 50);
+        }, 0, 50);
     }
 
     private void showVelocity() {
         mWheelState = mRosApiClientInstance.getWheelState();
-        runOnUiThread(new Runnable() {
-            @Override
-            public void run() {
-                mTvLeftWheelVelocity.setText(String.valueOf(mWheelState.msg.velocity.get(0)));
-                mTvRightWheelVelocity.setText(String.valueOf(mWheelState.msg.velocity.get(1)));
-            }
-        });
+        if (null != mWheelState) {
+            runOnUiThread(new Runnable() {
+                @Override
+                public void run() {
+                    mTvLeftWheelVelocity.setText(String.valueOf(mWheelState.msg.velocity.get(0)));
+                    mTvRightWheelVelocity.setText(String.valueOf(mWheelState.msg.velocity.get(1)));
+                }
+            });
+        }
     }
 }

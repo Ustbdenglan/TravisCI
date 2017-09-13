@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -72,7 +71,7 @@
         android:text="Camera" />
 
     <Button
-        android:id="@+id/button"
+        android:id="@+id/btn_wheel_state"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_below="@+id/btn_map"
@@ -83,24 +82,34 @@
         android:text="WheelState" />
 
     <Button
-        android:id="@+id/button2"
+        android:id="@+id/btn_mobile_base_controller"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignTop="@+id/button"
+        android:layout_alignTop="@+id/btn_wheel_state"
         android:layout_toEndOf="@+id/btn_battery_voltage"
         android:layout_toRightOf="@+id/btn_battery_voltage"
         android:onClick="onMobileBaseControllerClick"
         android:text="MobileBaseController" />
 
     <Button
-        android:id="@+id/button3"
+        android:id="@+id/btn_chest_button"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignEnd="@+id/button"
-        android:layout_alignRight="@+id/button"
-        android:layout_below="@+id/button2"
+        android:layout_alignEnd="@+id/btn_wheel_state"
+        android:layout_alignRight="@+id/btn_wheel_state"
+        android:layout_below="@+id/btn_mobile_base_controller"
         android:layout_marginTop="17dp"
         android:onClick="onChestButtonClick"
         android:text="ChestButton" />
+
+    <Button
+        android:id="@+id/btn_led"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/btn_mobile_base_controller"
+        android:layout_alignStart="@+id/btn_mobile_base_controller"
+        android:layout_alignTop="@+id/btn_chest_button"
+        android:onClick="onLedClick"
+        android:text="Led" />
 
 </RelativeLayout>

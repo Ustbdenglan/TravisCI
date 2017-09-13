@@ -21,6 +21,7 @@ public class MapActivity extends Activity {
 
     private ImageView ivMap;
     private RosApiClient mRosApiClientInstance;
+    private Bitmap mBitmap;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,43 +37,54 @@ public class MapActivity extends Activity {
             public void run() {
                 showMap();
             }
-        }, 3000);
+        }, 0);
     }
 
     private void showMap() {
         String mapData = mRosApiClientInstance.getMapData();
-        try {
-            JSONParser parser = new JSONParser();
-            JSONObject jsonObj = (JSONObject) parser.parse(mapData);
-            JSONArray dataArray = (JSONArray) jsonObj.get("data");
-            JSONObject jsonInfo = (JSONObject) jsonObj.get("info");
-            int width = (int) (long) jsonInfo.get("width");
-            int height = (int) (long) jsonInfo.get("height");
+        if (null != mapData) {
+            try {
+                JSONParser parser = new JSONParser();
+                JSONObject jsonObj = (JSONObject) parser.parse(mapData);
+                JSONArray dataArray = (JSONArray) jsonObj.get("data");
+                JSONObject jsonInfo = (JSONObject) jsonObj.get("info");
 
-            final Bitmap bitmap = Bitmap.createBitmap(width, height, Bitmap.Config.ALPHA_8);
+                int width = (int) (long) jsonInfo.get("width");
+                int height = (int) (long) jsonInfo.get("height");
 
-            int len = dataArray.size();
-            int x, y, d, p;
-            for (int i = 0; i < len; i++) {
-                x = i % width;
-                y = i / width;
-                d = (int) (long) dataArray.get(i);
-                if (d == -1) {
-                    bitmap.setPixel(x, y, Color.rgb(0x59, 0x59, 0x59));
-                } else {
-                    p = 0x59 + (int) ((0xB1 - 0x59) * d / 100f);
-                    bitmap.setPixel(x, y, Color.rgb(p, p, p));
+                JSONObject jsonInf = (JSONObject) jsonInfo.get("map_load_time");
+
+                int secs = (int) (long) jsonInf.get("secs");
+                int nsecs = (int) (long) jsonInf.get("nsecs");
+
+                if (secs != 0 && nsecs != 0) {
+                    mBitmap = Bitmap.createBitmap(width, height, Bitmap.Config.RGB_565);
+
+                    int len = dataArray.size();
+                    int x, y, d, p;
+                    for (int i = 0; i < len; i++) {
+                        x = i % width;
+                        y = height - 1 - i / width;
+
+                        d = (int) (long) dataArray.get(i);
+                        if (d == -1) {
+                            mBitmap.setPixel(x, y, Color.rgb(0x59, 0x59, 0x59));
+                        } else {
+                            p = 0x59 + (int) ((0xB1 - 0x59) * d / 100f);
+                            mBitmap.setPixel(x, y, Color.rgb(p, p, p));
+                        }
+                    }
                 }
+
+                runOnUiThread(new Runnable() {
+                    @Override
+                    public void run() {
+                        ivMap.setImageDrawable(new BitmapDrawable(getResources(), mBitmap));
+                    }
+                });
+            } catch (Exception e) {
+                e.printStackTrace();
             }
-
-            runOnUiThread(new Runnable() {
-                @Override
-                public void run() {
-                    ivMap.setImageDrawable(new BitmapDrawable(getResources(), bitmap));
-                }
-            });
-        } catch (Exception e) {
-            e.printStackTrace();
         }
     }
 }

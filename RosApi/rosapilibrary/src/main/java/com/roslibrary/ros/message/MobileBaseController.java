@@ -6,7 +6,7 @@ import java.util.List;
  * Created by Eligah on 2017/9/12.
  */
 
-public class MobileBaseController {
+public class MobileBaseController extends Message {
 
     public String topic;
     public MsgBean msg;
@@ -15,7 +15,7 @@ public class MobileBaseController {
     public static class MsgBean {
 
         public TwistBeanX twist;
-        public HeaderBean header;
+        public Header header;
         public PoseBeanX pose;
         public String child_frame_id;
 
@@ -42,19 +42,6 @@ public class MobileBaseController {
                     public int x;
                     public double z;
                 }
-            }
-        }
-
-        public static class HeaderBean {
-
-            public StampBean stamp;
-            public String frame_id;
-            public int seq;
-
-            public static class StampBean {
-
-                public int secs;
-                public int nsecs;
             }
         }
 
