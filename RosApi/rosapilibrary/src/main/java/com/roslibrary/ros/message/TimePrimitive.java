@@ -16,10 +16,9 @@
  * You should have received a copy of the GNU General Public License
  * along with the Java ROSBridge Client.  If not, see http://www.gnu.org/licenses/.
  */
-package com.roslibrary.ros.rosapi.message;
+package com.roslibrary.ros.message;
 
-import com.roslibrary.ros.message.Message;
-import com.roslibrary.ros.message.MessageType;
-
-public class Empty extends Message {
+public class TimePrimitive extends Message {
+    public int secs;
+    public int nsecs;
 }

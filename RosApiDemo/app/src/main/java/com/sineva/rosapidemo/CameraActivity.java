@@ -43,50 +43,52 @@ public class CameraActivity extends Activity {
             public void run() {
                 showCameraPicture();
             }
-        }, 3000, 50);
+        }, 0, 50);
     }
 
     private void showCameraPicture() {
         String cameraData = mRosApiClientInstance.getCameraData();
-        try {
-            JSONParser parser = new JSONParser();
-            JSONObject jsonObj = (JSONObject) parser.parse(cameraData);
-            final String bitmaps = (String) jsonObj.get("data");
-
-            byte[] imgByte = null;
-            InputStream input = null;
+        if (null != cameraData) {
             try {
-                imgByte = Base64.decode(bitmaps, Base64.DEFAULT);
-                BitmapFactory.Options options = new BitmapFactory.Options();
-                options.inSampleSize = 1;
-                input = new ByteArrayInputStream(imgByte);
-                SoftReference softRef = new SoftReference(BitmapFactory.decodeStream(input, null, options));
-                mBitmap = (Bitmap) softRef.get();
+                JSONParser parser = new JSONParser();
+                JSONObject jsonObj = (JSONObject) parser.parse(cameraData);
+                final String bitmaps = (String) jsonObj.get("data");
 
-                runOnUiThread(new Runnable() {
-                    @Override
-                    public void run() {
-                        ivCamera.setImageDrawable(new BitmapDrawable(mBitmap));
+                byte[] imgByte = null;
+                InputStream input = null;
+                try {
+                    imgByte = Base64.decode(bitmaps, Base64.DEFAULT);
+                    BitmapFactory.Options options = new BitmapFactory.Options();
+                    options.inSampleSize = 1;
+                    input = new ByteArrayInputStream(imgByte);
+                    SoftReference softRef = new SoftReference(BitmapFactory.decodeStream(input, null, options));
+                    mBitmap = (Bitmap) softRef.get();
+
+                    runOnUiThread(new Runnable() {
+                        @Override
+                        public void run() {
+                            ivCamera.setImageDrawable(new BitmapDrawable(mBitmap));
+                        }
+                    });
+                } catch (Exception e) {
+                    e.printStackTrace();
+                } finally {
+
+                    if (imgByte != null) {
+                        imgByte = null;
                     }
-                });
+
+                    if (input != null) {
+                        try {
+                            input.close();
+                        } catch (IOException e) {
+                            e.printStackTrace();
+                        }
+                    }
+                }
             } catch (Exception e) {
                 e.printStackTrace();
-            } finally {
-
-                if (imgByte != null) {
-                    imgByte = null;
-                }
-
-                if (input != null) {
-                    try {
-                        input.close();
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
-                }
             }
-        } catch (Exception e) {
-            e.printStackTrace();
         }
     }
 }

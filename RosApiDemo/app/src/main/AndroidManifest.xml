@@ -28,6 +28,8 @@
         <activity android:name="com.sineva.rosapidemo.ChestButtonActivity" />
         <activity android:name="com.sineva.rosapidemo.MobileBaseControllerActivity" />
         <activity android:name="com.sineva.rosapidemo.WheelStateActivity" />
+        <activity android:name="com.sineva.rosapidemo.CameraActivity" />
+        <activity android:name="com.sineva.rosapidemo.LedActivity" />
     </application>
 
 </manifest>

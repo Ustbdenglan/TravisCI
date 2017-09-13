@@ -19,7 +19,7 @@
 package com.roslibrary.ros;
 
 import com.roslibrary.ros.message.Message;
-import com.roslibrary.ros.rosapi.message.TypeDef;
+import com.roslibrary.ros.rosapi.responsetype.TypeDef;
 import com.roslibrary.ros.rosbridge.FullMessageHandler;
 import com.roslibrary.ros.rosbridge.ROSBridgeClient;
 import com.roslibrary.ros.rosbridge.operation.Operation;

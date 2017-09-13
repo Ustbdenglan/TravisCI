@@ -2,7 +2,7 @@ package com.roslibrary.ros.message;
 
 import java.util.List;
 
-public class AimrPowerState {
+public class AimrPowerState extends Message {
 
     public String topic;
     public MsgBean msg;

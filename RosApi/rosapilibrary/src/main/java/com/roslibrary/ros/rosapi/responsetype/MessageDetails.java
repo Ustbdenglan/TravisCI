@@ -16,12 +16,12 @@
  * You should have received a copy of the GNU General Public License
  * along with the Java ROSBridge Client.  If not, see http://www.gnu.org/licenses/.
  */
-package com.roslibrary.ros.rosapi.message;
+package com.roslibrary.ros.rosapi.responsetype;
 
 import com.roslibrary.ros.message.Message;
 import com.roslibrary.ros.message.MessageType;
 
-
-@MessageType(string = "rosapi/GetTimeResponse")
-public class GetTime extends Message {
+@MessageType(string = "rosapi/MessageDetails")
+public class MessageDetails extends Message {
+    public TypeDef[] typedefs;
 }

@@ -5,6 +5,8 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.View;
 
+import com.roslibrary.ros.RosApiClient;
+
 
 public class ChooseActivity extends Activity {
 
@@ -48,5 +50,15 @@ public class ChooseActivity extends Activity {
 
     public void onChestButtonClick(View view) {
         startActivity(new Intent(ChooseActivity.this, ChestButtonActivity.class));
+    }
+
+    public void onLedClick(View view) {
+        startActivity(new Intent(ChooseActivity.this, LedActivity.class));
+    }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        RosApiClient.getRosApiClientInstance().shutDownClient();
     }
 }

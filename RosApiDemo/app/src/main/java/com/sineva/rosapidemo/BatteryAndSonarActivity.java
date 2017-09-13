@@ -40,13 +40,15 @@ public class BatteryAndSonarActivity extends Activity {
                     }
                 });
             }
-        }, 3000, 500);
+        }, 0, 50);
     }
 
     private void showData() {
         AimrPowerState aimrPowerState = mRosApiClientInstance.getAimrPowerState();
-        tvBatteryVoltage.setText(String.valueOf(aimrPowerState.msg.data.discharge_voltage));
-        tvFrontSonarDistance.setText(String.valueOf(aimrPowerState.msg.data.sonar.get(1)));
-        tvBackSonarDistance.setText(String.valueOf(aimrPowerState.msg.data.sonar.get(3)));
+        if (null != aimrPowerState) {
+            tvBatteryVoltage.setText(String.valueOf(aimrPowerState.msg.data.discharge_voltage));
+            tvFrontSonarDistance.setText(String.valueOf(aimrPowerState.msg.data.sonar.get(1)));
+            tvBackSonarDistance.setText(String.valueOf(aimrPowerState.msg.data.sonar.get(3)));
+        }
     }
 }

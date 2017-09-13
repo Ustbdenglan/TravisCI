@@ -6,5 +6,87 @@
     android:layout_height="match_parent">
 
 
+    <TextView
+        android:id="@+id/tv_position"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginLeft="73dp"
+        android:layout_marginStart="73dp"
+        android:layout_marginTop="52dp"
+        android:text="Position :" />
 
+    <TextView
+        android:id="@+id/tv_positionx"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignBottom="@+id/tv_position"
+        android:layout_marginLeft="87dp"
+        android:layout_marginStart="87dp"
+        android:layout_toEndOf="@+id/tv_position"
+        android:layout_toRightOf="@+id/tv_position" />
+
+    <TextView
+        android:id="@+id/tv_positiony"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/tv_positionx"
+        android:layout_alignRight="@+id/tv_positionx"
+        android:layout_below="@+id/tv_positionx"
+        android:layout_marginTop="29dp" />
+
+    <TextView
+        android:id="@+id/tv_positionz"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/tv_positiony"
+        android:layout_alignStart="@+id/tv_positiony"
+        android:layout_below="@+id/tv_positiony"
+        android:layout_marginTop="35dp" />
+
+    <TextView
+        android:id="@+id/tv_orientation"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignLeft="@+id/tv_position"
+        android:layout_alignStart="@+id/tv_position"
+        android:layout_centerVertical="true"
+        android:text="Orientation :" />
+
+    <TextView
+        android:id="@+id/tv_orientationx"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/tv_positionz"
+        android:layout_alignRight="@+id/tv_positionz"
+        android:layout_alignTop="@+id/tv_orientation" />
+
+    <TextView
+        android:id="@+id/tv_orientationy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignEnd="@+id/tv_orientationx"
+        android:layout_alignRight="@+id/tv_orientationx"
+        android:layout_below="@+id/tv_orientationx"
+        android:layout_marginTop="41dp" />
+
+    <TextView
+        android:id="@+id/tv_orientationz"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="44dp"
+        android:layout_below="@+id/tv_orientationy"
+        android:layout_alignLeft="@+id/tv_orientationy"
+        android:layout_alignStart="@+id/tv_orientationy" />
+
+    <TextView
+        android:id="@+id/tv_orientationw"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="39dp"
+        android:layout_below="@+id/tv_orientationz"
+        android:layout_alignLeft="@+id/tv_orientationz"
+        android:layout_alignStart="@+id/tv_orientationz" />
 </RelativeLayout>

@@ -5,26 +5,25 @@ import android.os.Bundle;
 import android.widget.TextView;
 
 import com.roslibrary.ros.RosApiClient;
-import com.roslibrary.ros.message.ButtonState;
+import com.roslibrary.ros.message.LedState;
 
 import java.util.Timer;
 import java.util.TimerTask;
 
 
-public class ChestButtonActivity extends Activity {
+public class LedActivity extends Activity {
 
-    private TextView tvButtonPushed;
+    private TextView tvLedState;
 
     private RosApiClient mRosApiClientInstance;
-
-    private boolean isButtonPressed;
+    private LedState ledState;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_chest_button);
+        setContentView(R.layout.activity_led);
 
-        tvButtonPushed = (TextView) findViewById(R.id.tv_chest_button);
+        tvLedState = (TextView) findViewById(R.id.tv_led);
 
         mRosApiClientInstance = RosApiClient.getRosApiClientInstance();
 
@@ -37,13 +36,12 @@ public class ChestButtonActivity extends Activity {
     }
 
     private void showData() {
-        ButtonState chestButtonState = mRosApiClientInstance.getChestButtonState();
-        if (null != chestButtonState) {
-            isButtonPressed = chestButtonState.msg.data;
+        ledState = mRosApiClientInstance.getLedState();
+        if (null != ledState) {
             runOnUiThread(new Runnable() {
                 @Override
                 public void run() {
-                    tvButtonPushed.setText("ButtonPressed : " + isButtonPressed);
+                    tvLedState.setText("LedState = " + ledState.msg.data);
                 }
             });
         }

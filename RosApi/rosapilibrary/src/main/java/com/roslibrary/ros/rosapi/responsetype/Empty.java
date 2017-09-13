@@ -16,12 +16,9 @@
  * You should have received a copy of the GNU General Public License
  * along with the Java ROSBridge Client.  If not, see http://www.gnu.org/licenses/.
  */
-package com.roslibrary.ros.rosapi.message;
+package com.roslibrary.ros.rosapi.responsetype;
 
 import com.roslibrary.ros.message.Message;
-import com.roslibrary.ros.message.MessageType;
 
-@MessageType(string = "rosapi/Nodes")
-public class Nodes extends Message {
-    public String[] nodes;
+public class Empty extends Message {
 }
