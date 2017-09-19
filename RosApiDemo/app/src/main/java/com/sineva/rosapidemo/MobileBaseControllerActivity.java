@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.widget.TextView;
 
 import com.roslibrary.ros.RosApiClient;
-import com.roslibrary.ros.message.MobileBaseController;
+import com.roslibrary.ros.message.Odometry;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -22,7 +22,7 @@ public class MobileBaseControllerActivity extends Activity {
     private TextView mTvOrientationZ;
     private TextView mTvOrientationW;
 
-    private MobileBaseController mMoveBaseData;
+    private Odometry mMoveBaseData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

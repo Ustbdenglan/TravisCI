@@ -15,8 +15,8 @@ public class AimrPowerState extends Message {
         public static class DataBean {
 
             public int battery_status;
-            public double discharge_voltage;
-            public double charge_voltage;
+            public float discharge_voltage;
+            public float charge_voltage;
             public int estop;
             public int head_motor_mid_crossing;
             public int shutdown;

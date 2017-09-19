@@ -2,10 +2,12 @@ package com.sineva.rosapidemo;
 
 import android.app.Activity;
 import android.os.Bundle;
+import android.util.Log;
 import android.widget.TextView;
 
+import com.roslibrary.ros.Constants;
 import com.roslibrary.ros.RosApiClient;
-import com.roslibrary.ros.message.ButtonState;
+import com.roslibrary.ros.message.Button;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -37,7 +39,7 @@ public class ChestButtonActivity extends Activity {
     }
 
     private void showData() {
-        ButtonState chestButtonState = mRosApiClientInstance.getChestButtonState();
+        Button chestButtonState = mRosApiClientInstance.getChestButtonState();
         if (null != chestButtonState) {
             isButtonPressed = chestButtonState.msg.data;
             runOnUiThread(new Runnable() {

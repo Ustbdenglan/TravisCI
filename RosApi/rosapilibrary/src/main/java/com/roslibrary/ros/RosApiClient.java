@@ -5,11 +5,13 @@ import android.util.Log;
 import com.google.gson.Gson;
 import com.roslibrary.ros.entity.PublishEvent;
 import com.roslibrary.ros.message.AimrPowerState;
-import com.roslibrary.ros.message.ButtonState;
+import com.roslibrary.ros.message.Button;
+import com.roslibrary.ros.message.CompressedImage;
+import com.roslibrary.ros.message.JointState;
 import com.roslibrary.ros.message.LaserScan;
-import com.roslibrary.ros.message.LedState;
-import com.roslibrary.ros.message.MobileBaseController;
-import com.roslibrary.ros.message.WheelState;
+import com.roslibrary.ros.message.Led;
+import com.roslibrary.ros.message.OccupancyGrid;
+import com.roslibrary.ros.message.Odometry;
 import com.roslibrary.ros.rosbridge.ROSBridgeClient;
 
 import java.util.Timer;
@@ -37,20 +39,20 @@ public class RosApiClient {
     private Double mHead_Def_linearSpeed = 5.0;
     private Double mHead_Def_angularSpeed = 30.0;
 
-    private String mMapData;
-    private String mImageRawCompressedData;
     private String mMoveBaseMsg;
 
     private AimrPowerState mAimrPowerState;
+    private CompressedImage mImageRawCompressedData;
     private LaserScan mLaserData;
-    private MobileBaseController mMobileBaseController;
-    private WheelState mWheelState;
-    private LedState mLedState;
-    private ButtonState mButtonState;
+    private Odometry mOdometry;
+    private JointState mJointState;
+    private Led mLed;
+    private Button mButton;
+    private OccupancyGrid mMapData;
 
     private Timer mTimer;
     private String mHeadMsg;
-    private String mResult;
+    private String mResponseData;
 
     public static RosApiClient getRosApiClientInstance() {
         if (mRosApiClient == null) {
@@ -63,27 +65,21 @@ public class RosApiClient {
         return mRosApiClient;
     }
 
-    public String initClient(String ip, String port) {
+    public boolean initClient(String ip, String port, String[] topicArray) {
         Log.e(Constants.TAG, "IP = " + ip + ", PORT = " + port);
-        return connect(ip, port);
+        return connect(ip, port, topicArray);
     }
 
     //connect the websocket
-    private String connect(String ip, String port) {
+    private boolean connect(String ip, String port, final String[] topicArray) {
         mClient = new ROSBridgeClient("ws://" + ip + ":" + port);
-        mClient.connect(new com.roslibrary.ros.ROSClient.ConnectionStatusListener() {
+        boolean isConnect = mClient.connect(new ROSClient.ConnectionStatusListener() {
             @Override
             public void onConnect() {
-                mClient.send(Constants.SUBSCRIBE_BATTERY_AND_SONAR_TOPIC);
-                mClient.send(Constants.SUBSCRIBE_LIDAR_TOPIC);
-                mClient.send(Constants.SUBSCRIBE_MAP_TOPIC);
-                mClient.send(Constants.SUBSCRIBE_KEY_TOPIC);
-                mClient.send(Constants.SUBSCRIBE_ODOMETER_TOPIC);
-                mClient.send(Constants.SUBSCRIBE_WHEEL_SPEED_TOPIC);
-                mClient.send(Constants.SUBSCRIBE_CAMERA_TOPIC);
-                mClient.send(Constants.SUBSCRIBE_LED_TOPIC);
+                for (int i = 0; i < topicArray.length; i++) {
+                    mClient.send(Constants.SUBSCRIBE_TOPIC_HEADER + topicArray[i] + Constants.SUBSCRIBE_TOPIC_ENDER);
+                }
                 EventBus.getDefault().register(RosApiClient.this);
-                mResult = "Connect ROS success";
                 Log.e(Constants.TAG, "Connect ROS success");
             }
 
@@ -98,7 +94,7 @@ public class RosApiClient {
                 Log.e(Constants.TAG, "ROS communication error");
             }
         });
-        return mResult;
+        return isConnect;
     }
 
     //receive the data from rosbridge
@@ -112,22 +108,26 @@ public class RosApiClient {
                 mAimrPowerState = mGson.fromJson(msgBatteryAndSanorData, AimrPowerState.class);
                 break;
             case "/map":
-                mMapData = message.msg;
+                mMapData = mGson.fromJson(message.originMsg, OccupancyGrid.class);
                 break;
             case "/mobile_base_controller/odom":
-                mMobileBaseController = mGson.fromJson(message.originMsg, MobileBaseController.class);
+                mOdometry = mGson.fromJson(message.originMsg, Odometry.class);
                 break;
-            case "/usb_cam/image_raw/compressed":
-                mImageRawCompressedData = message.msg;
+            case "/rgbd/rgb/image_raw/compressed":
+                mImageRawCompressedData = mGson.fromJson(message.originMsg, CompressedImage.class);
                 break;
             case "/aimr_power/btn_state":
-                mButtonState = mGson.fromJson(message.originMsg, ButtonState.class);
+                mButton = mGson.fromJson(message.originMsg, Button.class);
                 break;
             case "/aimr_power/led_state":
-                mLedState = mGson.fromJson(message.originMsg, LedState.class);
+                mLed = mGson.fromJson(message.originMsg, Led.class);
                 break;
+            case "/joint_states":
             case "/joint_states_throttle":
-                mWheelState = mGson.fromJson(message.originMsg, WheelState.class);
+                mJointState = mGson.fromJson(message.originMsg, JointState.class);
+                break;
+            default:
+                mResponseData = message.originMsg;
                 break;
         }
     }
@@ -140,28 +140,32 @@ public class RosApiClient {
         return mLaserData;
     }
 
-    public String getMapData() {
+    public OccupancyGrid getMapData() {
         return mMapData;
     }
 
-    public MobileBaseController getMoveBaseData() {
-        return mMobileBaseController;
+    public Odometry getMoveBaseData() {
+        return mOdometry;
     }
 
-    public String getCameraData() {
+    public CompressedImage getCameraData() {
         return mImageRawCompressedData;
     }
 
-    public ButtonState getChestButtonState() {
-        return mButtonState;
+    public Button getChestButtonState() {
+        return mButton;
     }
 
-    public LedState getLedState() {
-        return mLedState;
+    public Led getLedState() {
+        return mLed;
     }
 
-    public WheelState getWheelState() {
-        return mWheelState;
+    public JointState getWheelState() {
+        return mJointState;
+    }
+
+    public String getOtherMessage() {
+        return mResponseData;
     }
 
     //control the robot's wheel
@@ -318,14 +322,6 @@ public class RosApiClient {
 
     //unsubscribe topics
     public void shutDownClient() {
-        mClient.send(Constants.UNSUBSCRIBE_BATTERY_AND_SONAR_TOPIC);
-        mClient.send(Constants.UNSUBSCRIBE_CAMERA_TOPIC);
-        mClient.send(Constants.UNSUBSCRIBE_LIDAR_TOPIC);
-        mClient.send(Constants.UNSUBSCRIBE_MAP_TOPIC);
-        mClient.send(Constants.UNSUBSCRIBE_ODOMETER_TOPIC);
-        mClient.send(Constants.UNSUBSCRIBE_KEY_TOPIC);
-        mClient.send(Constants.UNSUBSCRIBE_WHEEL_SPEED_TOPIC);
-        mClient.send(Constants.UNSUBSCRIBE_LED_TOPIC);
         mClient.disconnect();
     }
 }

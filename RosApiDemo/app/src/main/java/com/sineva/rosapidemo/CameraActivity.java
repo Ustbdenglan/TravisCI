@@ -9,9 +9,7 @@ import android.util.Base64;
 import android.widget.ImageView;
 
 import com.roslibrary.ros.RosApiClient;
-
-import org.json.simple.JSONObject;
-import org.json.simple.parser.JSONParser;
+import com.roslibrary.ros.message.CompressedImage;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -47,17 +45,14 @@ public class CameraActivity extends Activity {
     }
 
     private void showCameraPicture() {
-        String cameraData = mRosApiClientInstance.getCameraData();
-        if (null != cameraData) {
+        CompressedImage compressedImage = mRosApiClientInstance.getCameraData();
+        if (null != compressedImage) {
+            String cameraData = compressedImage.msg.data;
             try {
-                JSONParser parser = new JSONParser();
-                JSONObject jsonObj = (JSONObject) parser.parse(cameraData);
-                final String bitmaps = (String) jsonObj.get("data");
-
                 byte[] imgByte = null;
                 InputStream input = null;
                 try {
-                    imgByte = Base64.decode(bitmaps, Base64.DEFAULT);
+                    imgByte = Base64.decode(cameraData, Base64.DEFAULT);
                     BitmapFactory.Options options = new BitmapFactory.Options();
                     options.inSampleSize = 1;
                     input = new ByteArrayInputStream(imgByte);

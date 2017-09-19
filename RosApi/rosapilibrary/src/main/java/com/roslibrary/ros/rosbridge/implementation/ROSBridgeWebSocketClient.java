@@ -120,7 +120,7 @@ public class ROSBridgeWebSocketClient extends WebSocketClient {
                 try {
                     JSONObject jsonObject = (JSONObject) jsonParser.parse(message);
                     String content = jsonObject.get("values").toString();
-                    EventBus.getDefault().post(new PublishEvent(operation, serviceResponse.service, content));
+                    EventBus.getDefault().post(new PublishEvent(message, operation, serviceResponse.service, content));
                 } catch (ParseException e) {
                     e.printStackTrace();
                 }

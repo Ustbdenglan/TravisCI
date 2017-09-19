@@ -28,7 +28,7 @@
         android:layout_marginBottom="40dp"
         android:layout_marginTop="40dp"
         android:hint="Master IP"
-        android:text="192.168.31.225" />
+        android:text="192.168.31.139" />
 
     <EditText
         android:id="@+id/et_port"

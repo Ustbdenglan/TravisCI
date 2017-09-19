@@ -14,15 +14,15 @@ public class LaserScan extends Message {
 
     public static class MsgBean {
 
-        public double angle_min;
-        public double range_min;
-        public double scan_time;
-        public int range_max;
-        public double angle_increment;
-        public double angle_max;
+        public float angle_min;
+        public float range_min;
+        public float scan_time;
+        public float range_max;
+        public float angle_increment;
+        public float angle_max;
         public Header header;
-        public double time_increment;
+        public float time_increment;
         public List<Float> ranges;
-        public List<Integer> intensities;
+        public List<Float> intensities;
     }
 }
