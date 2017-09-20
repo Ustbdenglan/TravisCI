@@ -6,7 +6,7 @@ import java.util.List;
  * Created by Eligah on 2017/9/19.
  */
 
-public class CompressedImage {
+public class CompressedImage extends Message{
     public String topic;
     public MsgBean msg;
     public String op;

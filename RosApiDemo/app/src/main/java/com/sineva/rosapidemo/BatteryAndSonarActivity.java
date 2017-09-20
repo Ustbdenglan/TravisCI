@@ -2,10 +2,8 @@ package com.sineva.rosapidemo;
 
 import android.app.Activity;
 import android.os.Bundle;
-import android.util.Log;
 import android.widget.TextView;
 
-import com.roslibrary.ros.Constants;
 import com.roslibrary.ros.RosApiClient;
 import com.roslibrary.ros.message.AimrPowerState;
 
