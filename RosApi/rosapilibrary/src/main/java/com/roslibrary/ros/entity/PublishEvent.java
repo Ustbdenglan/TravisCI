@@ -13,11 +13,6 @@ public class PublishEvent {
     public String name;
     public String op;
 
-
-    public PublishEvent(Operation operation, String name, String content) {
-
-    }
-
     public PublishEvent(String message, Operation operation, String name, String content) {
         if (null != operation) {
             id = operation.id;

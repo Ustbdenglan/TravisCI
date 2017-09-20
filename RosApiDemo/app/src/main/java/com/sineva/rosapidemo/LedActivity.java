@@ -5,7 +5,7 @@ import android.os.Bundle;
 import android.widget.TextView;
 
 import com.roslibrary.ros.RosApiClient;
-import com.roslibrary.ros.message.LedState;
+import com.roslibrary.ros.message.Led;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -16,7 +16,7 @@ public class LedActivity extends Activity {
     private TextView tvLedState;
 
     private RosApiClient mRosApiClientInstance;
-    private LedState ledState;
+    private Led ledState;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

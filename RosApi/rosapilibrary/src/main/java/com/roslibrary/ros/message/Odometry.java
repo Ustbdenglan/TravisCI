@@ -6,7 +6,7 @@ import java.util.List;
  * Created by Eligah on 2017/9/12.
  */
 
-public class MobileBaseController extends Message {
+public class Odometry extends Message {
 
     public String topic;
     public MsgBean msg;
@@ -22,7 +22,7 @@ public class MobileBaseController extends Message {
         public static class TwistBeanX {
 
             public TwistBean twist;
-            public List<Double> covariance;
+            public List<Float> covariance;
 
             public static class TwistBean {
 
@@ -31,15 +31,15 @@ public class MobileBaseController extends Message {
 
                 public static class LinearBean {
 
-                    public int y;
+                    public double y;
                     public double x;
-                    public int z;
+                    public double z;
                 }
 
                 public static class AngularBean {
 
-                    public int y;
-                    public int x;
+                    public double y;
+                    public double x;
                     public double z;
                 }
             }
@@ -48,7 +48,7 @@ public class MobileBaseController extends Message {
         public static class PoseBeanX {
 
             public PoseBean pose;
-            public List<Double> covariance;
+            public List<Float> covariance;
 
             public static class PoseBean {
 
@@ -57,17 +57,17 @@ public class MobileBaseController extends Message {
 
                 public static class PositionBean {
 
-                    public double y;
-                    public double x;
-                    public int z;
+                    public float y;
+                    public float x;
+                    public float z;
                 }
 
                 public static class OrientationBean {
 
-                    public int y;
-                    public int x;
-                    public double z;
-                    public double w;
+                    public float y;
+                    public float x;
+                    public float z;
+                    public float w;
                 }
             }
         }

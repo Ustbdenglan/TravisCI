@@ -4,7 +4,7 @@ package com.roslibrary.ros.message;
  * Created by Eligah on 2017/9/13.
  */
 
-public class LedState extends Message {
+public class Led extends Message {
 
     public String topic;
     public MsgBean msg;

@@ -4,7 +4,7 @@ import android.os.Bundle;
 import android.widget.TextView;
 
 import com.roslibrary.ros.RosApiClient;
-import com.roslibrary.ros.message.WheelState;
+import com.roslibrary.ros.message.JointState;
 
 import java.util.Timer;
 import java.util.TimerTask;
@@ -17,7 +17,7 @@ public class WheelStateActivity extends MainActivity {
 
     private RosApiClient mRosApiClientInstance;
 
-    private WheelState mWheelState;
+    private JointState mWheelState;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

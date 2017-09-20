@@ -40,7 +40,7 @@ public class BatteryAndSonarActivity extends Activity {
                     }
                 });
             }
-        }, 0, 50);
+        }, 0, 500);
     }
 
     private void showData() {
