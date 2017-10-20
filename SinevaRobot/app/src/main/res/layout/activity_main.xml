@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <Button
+        android:id="@+id/tour_guide_setting"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/shape"
+        android:onClick="onTourGuideClick"
+        android:text="导览设置"
+        android:layout_marginRight="71dp"
+        android:layout_marginEnd="71dp"
+        android:layout_above="@+id/welcome_setting"
+        android:layout_alignRight="@+id/hold_speak"
+        android:layout_alignEnd="@+id/hold_speak"
+        android:layout_marginBottom="32dp" />
+
+    <Button
+        android:id="@+id/ask_setting"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/shape"
+        android:onClick="onAskSettingClick"
+        android:text="问答设置"
+        android:layout_alignBaseline="@+id/tour_guide_setting"
+        android:layout_alignBottom="@+id/tour_guide_setting"
+        android:layout_alignLeft="@+id/base_setting"
+        android:layout_alignStart="@+id/base_setting" />
+
+    <Button
+        android:id="@+id/welcome_setting"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/shape"
+        android:onClick="onWelcomeSettingClick"
+        android:text="迎宾设置"
+        android:layout_above="@+id/movebase_control"
+        android:layout_alignLeft="@+id/tour_guide_setting"
+        android:layout_alignStart="@+id/tour_guide_setting"
+        android:layout_marginBottom="50dp" />
+
+    <Button
+        android:id="@+id/base_setting"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/shape"
+        android:onClick="onBaseSettingClick"
+        android:text="基本设置"
+        android:layout_alignBaseline="@+id/welcome_setting"
+        android:layout_alignBottom="@+id/welcome_setting"
+        android:layout_toRightOf="@+id/hold_speak"
+        android:layout_toEndOf="@+id/hold_speak" />
+
+    <Button
+        android:id="@+id/movebase_control"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="@drawable/shape"
+        android:onClick="onOperationClick"
+        android:text="操作"
+        android:layout_above="@+id/hold_speak"
+        android:layout_alignLeft="@+id/welcome_setting"
+        android:layout_alignStart="@+id/welcome_setting"
+        android:layout_marginBottom="102dp" />
+
+    <Button
+        android:id="@+id/hold_speak"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
+        android:layout_centerHorizontal="true"
+        android:layout_marginBottom="36dp"
+        android:background="@drawable/shape"
+        android:onClick="onHoldSpeak"
+        android:text="按住说话" />
+</RelativeLayout>
