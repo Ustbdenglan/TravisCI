@@ -19,7 +19,7 @@ import com.roslibrary.ros.message.JointState;
 import com.roslibrary.ros.message.Led;
 import com.roslibrary.ros.message.Odometry;
 import com.sineva.rosapidemo.R;
-import com.sineva.rosapidemo.Utils;
+import com.sineva.rosapidemo.utils.Utils;
 
 import java.util.ArrayList;
 import java.util.List;

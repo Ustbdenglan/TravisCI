@@ -1,4 +1,4 @@
-package com.sineva.rosapidemo;
+package com.sineva.rosapidemo.utils;
 
 import android.content.Context;
 import android.net.ConnectivityManager;

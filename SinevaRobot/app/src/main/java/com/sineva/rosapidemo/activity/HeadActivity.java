@@ -213,7 +213,8 @@ public class HeadActivity extends BaseActivity {
 
     private void sendHeadMsgToTopic(String msg) {
         if (mRosApiClientInstance != null) {
-            mRosApiClientInstance.send("{\"op\":\"publish\",\"topic\":\"/joy_teleop/cmd_vel_head\",\"msg\":{" + msg + "}}");
+            mRosApiClientInstance.publishTopic("/joy_teleop/cmd_vel_head",msg);
+            //mRosApiClientInstance.send("{\"op\":\"publish\",\"topic\":\"/joy_teleop/cmd_vel_head\",\"msg\":{" + msg + "}}");
         }
     }
 

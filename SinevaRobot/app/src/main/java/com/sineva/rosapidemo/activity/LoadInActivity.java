@@ -15,6 +15,7 @@ import android.widget.Toast;
 
 import com.roslibrary.ros.RosApiClient;
 import com.sineva.rosapidemo.R;
+import com.sineva.rosapidemo.SinevaApplication;
 
 public class LoadInActivity extends Activity {
 
@@ -34,6 +35,7 @@ public class LoadInActivity extends Activity {
         mIvIcon = findViewById(R.id.iv_icon);
 
         rotateAnim();
+        login();
     }
 
 
@@ -52,6 +54,31 @@ public class LoadInActivity extends Activity {
 
         String connectResult = "";
         if (isConnectSuccess) {
+            connectResult = "Connect ROS success";
+            startActivity(intent);
+        } else {
+            connectResult = "Connect ROS fail";
+        }
+        Toast.makeText(this, connectResult, Toast.LENGTH_SHORT).show();
+    }
+
+
+    private void login(){
+        Intent intent = new Intent(LoadInActivity.this, ChooseActivity.class);
+        mRosApiClientInstance = RosApiClient.getRosApiClientInstance();
+        String ip = mEtIp.getText().toString();
+        String port = mEtPort.getText().toString();
+        boolean isConnectSuccess = mRosApiClientInstance.initClient(ip, port, this.getApplicationContext());
+
+        SharedPreferences mSharedPreferences = getSharedPreferences("ConnectIpAndPort", 0);
+        SharedPreferences.Editor mEditor = mSharedPreferences.edit();
+        mEditor.putString("ip", ip);
+        mEditor.putString("port", port);
+        mEditor.commit();
+
+        String connectResult = "";
+        if (isConnectSuccess) {
+            SinevaApplication.setRosClient(mRosApiClientInstance);
             connectResult = "Connect ROS success";
             startActivity(intent);
         } else {

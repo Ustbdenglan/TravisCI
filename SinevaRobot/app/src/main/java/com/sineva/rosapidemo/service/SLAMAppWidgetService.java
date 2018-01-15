@@ -12,7 +12,7 @@ import android.util.Log;
 import com.roslibrary.ros.RosApiClient;
 import com.roslibrary.ros.message.AimrPowerState;
 import com.roslibrary.ros.message.Odometry;
-import com.sineva.rosapidemo.Utils;
+import com.sineva.rosapidemo.utils.Utils;
 
 /**
  * Created by Eligah on 2017/9/29.

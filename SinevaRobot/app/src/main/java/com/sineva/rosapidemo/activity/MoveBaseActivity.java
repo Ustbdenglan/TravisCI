@@ -214,7 +214,8 @@ public class MoveBaseActivity extends BaseActivity {
 
     private void sendMoveBaseMsgToTopic(String msg) {
         if (mRosApiClientInstance != null) {
-            mRosApiClientInstance.send("{\"op\":\"publish\",\"topic\":\"/joy_teleop/cmd_vel_base\",\"msg\":{" + msg + "}}");
+            mRosApiClientInstance.publishTopic("/joy_teleop/cmd_vel_base",msg);
+            //mRosApiClientInstance.send("{\"op\":\"publish\",\"topic\":\"/joy_teleop/cmd_vel_base\",\"msg\":{" + msg + "}}");
         }
     }
 
