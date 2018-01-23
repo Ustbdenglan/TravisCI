@@ -86,6 +86,7 @@ public class ChooseActivity extends BaseActivity {
         }
     }
 
+
     private void initCurrentView() {
         tvBatteryVoltage = (TextView) findViewById(R.id.tv_battery_voltage);
         tvFrontSonarDistance = (TextView) findViewById(R.id.tv_front_sonar);
@@ -213,6 +214,8 @@ public class ChooseActivity extends BaseActivity {
             batteryLever = 15;
         } else if (batteryVoltage >= 20.5 && batteryVoltage < 21) {
             batteryLever = 10;
+        } else if (batteryVoltage >= 20.3 && batteryVoltage < 28) {
+            batteryLever = (int) (5 + ((28 - batteryVoltage) / 0.5));
         } else if (batteryVoltage >= 20.3 && batteryVoltage < 20.5) {
             batteryLever = 5;
         } else {
