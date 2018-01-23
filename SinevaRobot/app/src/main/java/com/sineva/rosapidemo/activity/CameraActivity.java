@@ -3,7 +3,6 @@ package com.sineva.rosapidemo.activity;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.graphics.drawable.BitmapDrawable;
-import android.os.Bundle;
 import android.util.Base64;
 import android.widget.ImageView;
 
@@ -16,22 +15,32 @@ import java.io.InputStream;
 import java.lang.ref.SoftReference;
 import java.util.TimerTask;
 
+import butterknife.BindView;
+
 
 public class CameraActivity extends BaseActivity {
 
-    private ImageView ivCamera;
+    @BindView(R.id.iv_camera)
+    ImageView ivCamera;
 
     private Bitmap mBitmap = null;
 
     private String[] mTopicArray = {"/rgbd/rgb/image_raw/compressed"};
 
+
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_camera);
+    protected int getLayoutId() {
+        return R.layout.activity_camera;
+    }
 
-        ivCamera = (ImageView) findViewById(R.id.iv_camera);
+    @Override
+    protected void initView() {
 
+    }
+
+    @Override
+    protected void initData() {
         if (mRosApiClientInstance != null) {
             mRosApiClientInstance.subscribeTopic(mTopicArray);
         }

@@ -194,7 +194,9 @@ public class RosApiClient {
 
     //receive the data from rosbridge
     public void onEvent(PublishEvent message) {
+        //Log.e(TAG, "onEvent: ----------》"+message.originMsg );
         switch (message.name) {
+
             case "/scan":
                 mLaserData = mGson.fromJson(message.originMsg, LaserScan.class);
                 break;

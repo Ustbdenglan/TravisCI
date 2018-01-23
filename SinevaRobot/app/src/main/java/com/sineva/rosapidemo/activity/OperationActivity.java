@@ -1,7 +1,5 @@
 package com.sineva.rosapidemo.activity;
 
-import android.os.Bundle;
-
 import com.sineva.rosapidemo.R;
 
 /**
@@ -10,8 +8,12 @@ import com.sineva.rosapidemo.R;
 
 public class OperationActivity extends BaseActivity {
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_operation);
+    protected int getLayoutId() {
+        return R.layout.activity_operation;
+    }
+
+    @Override
+    protected void initView() {
+
     }
 }

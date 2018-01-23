@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:id="@+id/rl_root"
+    android:clickable="true"
+    tools:context="com.sineva.rosapidemo.activity.InMotionActivity">
+    <ImageView
+        android:id="@+id/img_home"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:src="@drawable/robot_bg2"
+        android:scaleType="fitXY"
+        android:alpha="0.5"
+        android:visibility="gone"
+        />
+   <LinearLayout
+       android:layout_alignParentTop="true"
+       android:layout_alignParentRight="true"
+       android:layout_margin="20dp"
+       android:orientation="vertical"
+       android:layout_width="400dp"
+       android:layout_height="wrap_content">
+       <TextView
+           android:id="@+id/tv_mileage_info"
+           android:text="@string/mileage_info"
+           android:textSize="30sp"
+           android:layout_margin="20dp"
+           android:layout_width="400dp"
+           android:layout_height="wrap_content" />
+       <TextView
+           android:id="@+id/tv_move_speed_info"
+           android:text="@string/move_speed_info"
+           android:textSize="30sp"
+           android:layout_margin="20dp"
+           android:layout_width="400dp"
+           android:layout_height="wrap_content" />
+       <TextView
+           android:id="@+id/tv_ultrasonic_info"
+           android:text="@string/ultrasonic_info"
+           android:textSize="30sp"
+           android:layout_margin="20dp"
+           android:layout_width="400dp"
+           android:layout_height="wrap_content" />
+       <TextView
+           android:id="@+id/tv_distance_info"
+           android:text="@string/distance_info"
+           android:textSize="30sp"
+           android:layout_margin="20dp"
+           android:layout_width="400dp"
+           android:layout_height="wrap_content" />
+   </LinearLayout>
+    <ImageView
+        android:visibility="gone"
+        android:src="@drawable/icon_start"
+        android:scaleType="fitXY"
+        android:id="@+id/img_start"
+        android:layout_centerInParent="true"
+        android:layout_width="320dp"
+        android:layout_height="320dp" />
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="600dp"
+        android:layout_alignParentBottom="true"
+        android:layout_marginLeft="36dp"
+        android:layout_marginRight="36dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
+        >
+        <LinearLayout
+            android:id="@+id/wake_up"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center_horizontal"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:layout_width="160dp"
+                android:layout_height="160dp"
+                android:src="@drawable/icon_wake_up"
+                />
+            <TextView
+                android:id="@+id/tv_wake_up"
+                android:text="@string/voice"
+                android:textSize="72sp"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                />
+        </LinearLayout>
+        <LinearLayout
+            android:id="@+id/handle"
+            android:layout_weight="1"
+            android:orientation="vertical"
+            android:gravity="center_horizontal"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content">
+            <ImageView
+                android:layout_width="160dp"
+                android:layout_height="160dp"
+                android:src="@drawable/icon_handle"
+                />
+            <TextView
+                android:id="@+id/tv_handle"
+                android:text="@string/handle"
+                android:textSize="72sp"
+                android:gravity="center"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                />
+        </LinearLayout>
+
+
+    </LinearLayout>
+
+</RelativeLayout>

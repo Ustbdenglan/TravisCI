@@ -1,0 +1,47 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="#F0F3F6"
+    >
+    <com.sineva.rosapidemo.view.ToolbarControl
+        android:id="@+id/toorbar"
+        android:layout_width="match_parent"
+        android:layout_height="135dp"
+        android:layout_margin="20dp"
+        app:titleText="@string/self_charge_setting"
+        android:gravity="center"
+        >
+    </com.sineva.rosapidemo.view.ToolbarControl>
+    <View style="@style/bg_line"/>
+    <Button
+        android:id="@+id/btn_chargeing"
+        android:text="@string/chargeing"
+        android:textSize="45sp"
+        android:layout_margin="20dp"
+        android:padding="20dp"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <Button
+        android:id="@+id/btn_charged"
+        android:text="@string/full_charged"
+        android:textSize="45sp"
+        android:layout_margin="20dp"
+        android:padding="20dp"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+    <Button
+        android:id="@+id/btn_charge_faliure"
+        android:text="@string/charge_faliure"
+        android:textSize="45sp"
+        android:layout_margin="20dp"
+        android:padding="20dp"
+        android:gravity="center"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content" />
+
+
+</LinearLayout>

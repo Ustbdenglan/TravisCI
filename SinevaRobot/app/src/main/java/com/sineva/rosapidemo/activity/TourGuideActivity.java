@@ -1,8 +1,6 @@
 package com.sineva.rosapidemo.activity;
 
 import android.content.Intent;
-import android.os.Bundle;
-import android.os.LocaleList;
 import android.view.View;
 
 import com.sineva.rosapidemo.R;
@@ -12,10 +10,15 @@ import com.sineva.rosapidemo.R;
  */
 
 public class TourGuideActivity extends BaseActivity {
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_tour_guide);
+    protected int getLayoutId() {
+        return R.layout.activity_tour_guide;
+    }
+
+    @Override
+    protected void initView() {
+
     }
 
     public void onCreateMapClick(View view) {
@@ -23,7 +26,7 @@ public class TourGuideActivity extends BaseActivity {
     }
 
     public void onLocalMapClick(View view) {
-        startActivity(new Intent(TourGuideActivity.this, LocalMapActivity.class));
+        startActivity(new Intent(TourGuideActivity.this, MapSettingActivity.class));
     }
 
     public void onEditSequence(View view) {

@@ -1,11 +1,8 @@
 package com.sineva.rosapidemo.activity;
 
-import android.app.Activity;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.os.Bundle;
 import android.view.View;
-import android.view.WindowManager;
 import android.view.animation.Animation;
 import android.view.animation.AnimationSet;
 import android.view.animation.AnimationUtils;
@@ -17,33 +14,40 @@ import com.roslibrary.ros.RosApiClient;
 import com.sineva.rosapidemo.R;
 import com.sineva.rosapidemo.SinevaApplication;
 
-public class LoadInActivity extends Activity {
+import butterknife.BindView;
 
-    private EditText mEtIp;
-    private EditText mEtPort;
+public class LoadInActivity extends BaseActivity {
+
+    @BindView(R.id.iv_icon)
+    ImageView ivIcon;
+    @BindView(R.id.et_ip)
+    EditText etIp;
+    @BindView(R.id.et_port)
+    EditText etPort;
+
     public RosApiClient mRosApiClientInstance;
-    private ImageView mIvIcon;
+
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        getWindow().addFlags(WindowManager.LayoutParams.FLAG_TRANSLUCENT_STATUS);
-        setContentView(R.layout.activity_loadin);
-
-        mEtIp = findViewById(R.id.et_ip);
-        mEtPort = findViewById(R.id.et_port);
-        mIvIcon = findViewById(R.id.iv_icon);
-
-        rotateAnim();
-        login();
+    protected int getLayoutId() {
+        return R.layout.activity_loadin;
     }
 
+    @Override
+    protected void initView() {
+        rotateAnim();
+    }
+
+    @Override
+    protected void initData() {
+        login();
+    }
 
     public void onConnectClick(View view) {
         Intent intent = new Intent(LoadInActivity.this, ChooseActivity.class);
         mRosApiClientInstance = RosApiClient.getRosApiClientInstance();
-        String ip = mEtIp.getText().toString();
-        String port = mEtPort.getText().toString();
+        String ip = etIp.getText().toString();
+        String port = etPort.getText().toString();
         boolean isConnectSuccess = mRosApiClientInstance.initClient(ip, port, this.getApplicationContext());
 
         SharedPreferences mSharedPreferences = getSharedPreferences("ConnectIpAndPort", 0);
@@ -63,11 +67,11 @@ public class LoadInActivity extends Activity {
     }
 
 
-    private void login(){
+    private void login() {
         Intent intent = new Intent(LoadInActivity.this, ChooseActivity.class);
         mRosApiClientInstance = RosApiClient.getRosApiClientInstance();
-        String ip = mEtIp.getText().toString();
-        String port = mEtPort.getText().toString();
+        String ip = etIp.getText().toString();
+        String port = etPort.getText().toString();
         boolean isConnectSuccess = mRosApiClientInstance.initClient(ip, port, this.getApplicationContext());
 
         SharedPreferences mSharedPreferences = getSharedPreferences("ConnectIpAndPort", 0);
@@ -89,11 +93,11 @@ public class LoadInActivity extends Activity {
 
     public void rotateAnim() {
         Animation animation = (AnimationSet) AnimationUtils.loadAnimation(this, R.anim.anim_set);
-        mIvIcon.setAnimation(animation);
+        ivIcon.setAnimation(animation);
         animation.start();
     }
 
     public void onMainClick(View view) {
-        startActivity(new Intent(LoadInActivity.this,MainActivity.class));
+        startActivity(new Intent(LoadInActivity.this, MainActivity.class));
     }
 }

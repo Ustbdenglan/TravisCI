@@ -6,7 +6,9 @@ import android.graphics.Color;
 import android.util.Base64;
 import android.util.Log;
 
+import com.google.gson.Gson;
 import com.roslibrary.ros.entity.PublishEvent;
+import com.roslibrary.ros.entity.UniWsResult;
 
 import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
@@ -16,12 +18,42 @@ import java.io.ByteArrayInputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.lang.ref.SoftReference;
+import java.lang.reflect.ParameterizedType;
+import java.lang.reflect.Type;
 
 /**
  * Created by Eligah on 2017/9/4.
  */
 
 public class Utils {
+
+    /**
+     * 数据解析
+     *
+     * @param jsonStr JSON字符串
+     * @return UniWsResult<T> 数据对象
+     */
+    public static <T> UniWsResult<T> parseJson(String jsonStr,Class c) {
+        Gson gson = new Gson();
+        Type objectType = type(UniWsResult.class, c);
+        return gson.fromJson(jsonStr, objectType);
+    }
+    static ParameterizedType type(final Class raw, final Type... args) {
+        return new ParameterizedType() {
+            public Type getRawType() {
+                return raw;
+            }
+
+            public Type[] getActualTypeArguments() {
+                return args;
+            }
+
+            public Type getOwnerType() {
+                return null;
+            }
+        };
+    }
+
     public static Bitmap parseMapData(PublishEvent msgMapData) {
         Bitmap bitmap = null;
         try {

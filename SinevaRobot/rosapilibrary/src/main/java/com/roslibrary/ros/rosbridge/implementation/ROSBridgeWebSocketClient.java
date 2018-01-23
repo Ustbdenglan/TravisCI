@@ -81,7 +81,7 @@ public class ROSBridgeWebSocketClient extends WebSocketClient {
 
     @Override
     public void onMessage(String message) {
-        Log.e(TAG, "onMessage: "+"wwwwwwwwwwwwww");
+        Log.e(TAG, "onMessage-->: "+message);
         if (debug) System.out.println("<ROS " + message);
         Operation operation = Operation.toOperation(message, classes);
 

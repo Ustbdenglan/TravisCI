@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="utf-8"?>
+<litepal>
+
+    <dbname value="sineva_robot_db" />
+    <version value="1" />
+
+    <!--
+
+    	<list>
+    		<mapping class="com.test.model.Reader" />
+    		<mapping class="com.test.model.Magazine" />
+    	</list>
+    -->
+    <list>
+
+           <!-- <mapping class="com.test.model.Reader" />
+            <mapping class="com.test.model.Magazine" />-->
+
+    </list>
+
+    <cases value="keep" ></cases>
+    <!--
+        external：如果设置external，数据库文件将储存在/storage/sdcard1/Android/data/应用包名/files/databases
+                  如果是不想被别人查看的数据，最好不要设置external
+                  在设置external的时候别忘了加权限<uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE"/>
+        internal：设置internal将把数据库存在应用内部文件夹，非本应用和root权限无法查看
+        不设置则默认internal
+    -->
+    <storage value="internal" />
+</litepal>
