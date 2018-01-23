@@ -19,7 +19,7 @@ import com.roslibrary.ros.message.JointState;
 import com.roslibrary.ros.message.Led;
 import com.roslibrary.ros.message.Odometry;
 import com.sineva.rosapidemo.R;
-import com.sineva.rosapidemo.Utils;
+import com.sineva.rosapidemo.utils.CommonUtils;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -82,6 +82,7 @@ public class ChooseActivity extends BaseActivity {
         }
     }
 
+
     private void initCurrentView() {
         tvBatteryVoltage = (TextView) findViewById(R.id.tv_battery_voltage);
         tvFrontSonarDistance = (TextView) findViewById(R.id.tv_front_sonar);
@@ -109,7 +110,8 @@ public class ChooseActivity extends BaseActivity {
 
         AimrPowerState aimrPowerState = mRosApiClientInstance.getAimrPowerState();
         if (null != aimrPowerState) {
-            tvBatteryVoltage.setText(String.valueOf(aimrPowerState.msg.data.discharge_voltage) + "V");
+            tvBatteryVoltage.setText(String.valueOf(
+                    getBatteryLever(aimrPowerState.msg.data.discharge_voltage)) + "%");
             tvFrontSonarDistance.setText(String.valueOf(aimrPowerState.msg.data.sonar.get(1)) + "cm");
             tvBackSonarDistance.setText(String.valueOf(aimrPowerState.msg.data.sonar.get(3)) + "cm");
         }
@@ -183,6 +185,21 @@ public class ChooseActivity extends BaseActivity {
         startActivity(new Intent(ChooseActivity.this, CameraActivity.class));
     }
 
+
+    private int getBatteryLever(double batteryVoltage) {
+        int batteryLever = 0;
+        if (batteryVoltage >= 28) {
+            batteryLever = 100;
+        } else if (batteryVoltage >= 20.3 && batteryVoltage < 28) {
+            batteryLever = (int) (5 + ((28 - batteryVoltage) / 0.5));
+        } else if (batteryVoltage >= 20.3 && batteryVoltage < 20.5) {
+            batteryLever = 5;
+        } else {
+            //电量不足，即将关机
+
+        }
+        return batteryLever;
+    }
     @Override
     protected void onDestroy() {
         super.onDestroy();
@@ -212,7 +229,7 @@ public class ChooseActivity extends BaseActivity {
         Cursor cursor = mWritableDatabase.query("button", new String[]{"time"}, null, null, null, null, null);
         while (cursor.moveToNext()) {
             long time = cursor.getLong(cursor.getColumnIndex("time"));
-            mList.add(Utils.parseTime(time));
+            mList.add(CommonUtils.parseTime(time));
         }
         mLvButtonPressedTime.setVisibility(View.VISIBLE);
         mScrollView.setVisibility(View.GONE);
