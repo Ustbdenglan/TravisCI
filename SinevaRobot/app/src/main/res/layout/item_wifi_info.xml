@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:gravity="center_vertical"
+    android:layout_width="match_parent"
+    android:layout_margin="20dp"
+    android:layout_height="100dp">
+    <TextView
+        android:layout_alignParentLeft="true"
+        android:id="@+id/tv_wifi_name"
+        android:text="欣奕华"
+        android:textSize="45sp"
+        android:layout_margin="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <ImageView
+        android:id="@+id/icon_wifi_lock"
+        android:src="@drawable/icon_lock"
+        android:layout_margin="20dp"
+        android:layout_alignParentRight="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+    <ImageView
+        android:layout_alignRight="@+id/icon_wifi_lock"
+        android:id="@+id/icon_wifi_signal"
+        android:src="@drawable/icon_signal"
+        android:layout_margin="20dp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content" />
+
+
+</RelativeLayout>

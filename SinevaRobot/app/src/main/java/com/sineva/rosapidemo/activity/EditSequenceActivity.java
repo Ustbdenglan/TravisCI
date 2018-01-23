@@ -1,7 +1,6 @@
 package com.sineva.rosapidemo.activity;
 
 import android.content.Intent;
-import android.os.Bundle;
 import android.view.View;
 
 import com.sineva.rosapidemo.R;
@@ -11,10 +10,15 @@ import com.sineva.rosapidemo.R;
  */
 
 public class EditSequenceActivity extends BaseActivity {
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_edit_sequence);
+    protected int getLayoutId() {
+        return R.layout.activity_edit_sequence;
+    }
+
+    @Override
+    protected void initView() {
+
     }
 
     public void onChooseScene(View view) {

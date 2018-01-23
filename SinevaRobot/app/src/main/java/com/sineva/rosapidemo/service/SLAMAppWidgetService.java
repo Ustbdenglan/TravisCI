@@ -12,7 +12,7 @@ import android.util.Log;
 import com.roslibrary.ros.RosApiClient;
 import com.roslibrary.ros.message.AimrPowerState;
 import com.roslibrary.ros.message.Odometry;
-import com.sineva.rosapidemo.Utils;
+import com.sineva.rosapidemo.utils.CommonUtils;
 
 /**
  * Created by Eligah on 2017/9/29.
@@ -98,7 +98,7 @@ public class SLAMAppWidgetService extends Service {
                     count++;
 
                     if (!mIsConnected) {
-                        if (Utils.isNetWorkDataAvailable(SLAMAppWidgetService.this)) {
+                        if (CommonUtils.isNetWorkDataAvailable(SLAMAppWidgetService.this)) {
                             mRosApiClientInstance = RosApiClient.getRosApiClientInstance();
 
                             SharedPreferences mSharedPreferences = getSharedPreferences("ConnectIpAndPort", 0);
@@ -127,10 +127,10 @@ public class SLAMAppWidgetService extends Service {
 
                         if (mMoveBaseData != null) {
                             double x = mMoveBaseData.msg.twist.twist.linear.x;
-                            x = Utils.formatDouble(x);
+                            x = CommonUtils.formatDouble(x);
                             updateIntent.putExtra("linear_speed", "Linear Speed : " + String.valueOf(x) + "m/s");
                             double z = mMoveBaseData.msg.twist.twist.angular.z;
-                            z = Utils.formatDouble(z);
+                            z = CommonUtils.formatDouble(z);
                             updateIntent.putExtra("angular_speed", "Angular Speed : " + String.valueOf(z) + "m/s");
                         }
                     }

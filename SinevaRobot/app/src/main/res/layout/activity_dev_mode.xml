@@ -1,0 +1,43 @@
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical"
+    android:background="#F0F3F6"
+    >
+    <com.sineva.rosapidemo.view.ToolbarControl
+        android:id="@+id/toorbar"
+        android:layout_width="match_parent"
+        android:layout_height="135dp"
+        android:layout_margin="20dp"
+        app:titleText="@string/dev_mode"
+        android:gravity="center"
+        >
+    </com.sineva.rosapidemo.view.ToolbarControl>
+    <View style="@style/bg_line"/>
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        >
+        <TextView
+            android:gravity="bottom"
+            android:layout_alignParentLeft="true"
+            android:text="@string/state"
+            android:textSize="40sp"
+            android:layout_margin="20dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+        <com.sineva.rosapidemo.view.SwitchButton
+            android:id="@+id/sbtn_devmode"
+            android:layout_alignParentTop="true"
+            android:layout_alignParentRight="true"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            app:sb_show_indicator="false"
+            android:layout_margin="20dp"
+            app:sb_checked="false"/>
+
+    </RelativeLayout>
+
+
+</LinearLayout>

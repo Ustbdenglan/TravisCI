@@ -1,35 +1,42 @@
 package com.sineva.rosapidemo.activity;
 
-import android.os.Bundle;
-import android.widget.RelativeLayout;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import com.roslibrary.ros.message.LaserScan;
 import com.sineva.rosapidemo.R;
 
 import java.util.List;
-import java.util.TimerTask;
+
+import butterknife.BindView;
 
 public class LidarActivity extends BaseActivity {
 
-    private RelativeLayout root;
+    @BindView(R.id.tv_secs)
+    TextView tvSecs;
+    @BindView(R.id.tv_nsecs)
+    TextView tvNsecs;
+    @BindView(R.id.root)
+    LinearLayout root;
     private LidarView lidarView;
-    private TextView tvSecs;
-    private TextView tvNsecs;
     private LaserScan mLaserScanData;
     private String[] mTopicArray = {"/scan"};
 
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_lidar);
+    protected int getLayoutId() {
+        return R.layout.activity_lidar;
+    }
 
-        root = (RelativeLayout) findViewById(R.id.root);
-        lidarView = new LidarView(this);
-        tvSecs = (TextView) findViewById(R.id.tv_secs);
-        tvNsecs = (TextView) findViewById(R.id.tv_nsecs);
+    @Override
+    protected void initView() {
 
+    }
 
+    @Override
+    protected void initData() {
+        //lidarView = new LidarView(this);
+/*
         if (mRosApiClientInstance != null) {
             mRosApiClientInstance.subscribeTopic(mTopicArray);
         }
@@ -41,7 +48,7 @@ public class LidarActivity extends BaseActivity {
                     showLaserScan();
                 }
             }, 0, 50);
-        }
+        }*/
     }
 
     private void showLaserScan() {
@@ -65,8 +72,8 @@ public class LidarActivity extends BaseActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (mRosApiClientInstance != null) {
+       /* if (mRosApiClientInstance != null) {
             mRosApiClientInstance.unSubscribeTopic(mTopicArray);
-        }
+        }*/
     }
 }

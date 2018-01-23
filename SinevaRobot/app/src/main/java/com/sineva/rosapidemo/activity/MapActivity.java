@@ -3,31 +3,37 @@ package com.sineva.rosapidemo.activity;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.drawable.BitmapDrawable;
-import android.os.Bundle;
 import android.widget.ImageView;
 
 import com.roslibrary.ros.message.OccupancyGrid;
 import com.sineva.rosapidemo.R;
 
-import java.util.TimerTask;
+import butterknife.BindView;
 
 
 public class MapActivity extends BaseActivity {
 
-    private ImageView ivMap;
+    @BindView(R.id.iv_map)
+    ImageView ivMap;
 
     private Bitmap mBitmap;
 
     private String[] mTopicArray = {"/map"};
 
+
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_map);
+    protected int getLayoutId() {
+        return R.layout.activity_map;
+    }
 
-        ivMap = (ImageView) findViewById(R.id.iv_map);
+    @Override
+    protected void initView() {
 
-        if (mRosApiClientInstance != null) {
+    }
+
+    @Override
+    protected void initData() {
+      /*  if (mRosApiClientInstance != null) {
             mRosApiClientInstance.subscribeTopic(mTopicArray);
         }
 
@@ -38,7 +44,7 @@ public class MapActivity extends BaseActivity {
                     showMap();
                 }
             }, 0, 50);
-        }
+        }*/
     }
 
     private void showMap() {
@@ -85,8 +91,8 @@ public class MapActivity extends BaseActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        if (mRosApiClientInstance != null) {
+       /* if (mRosApiClientInstance != null) {
             mRosApiClientInstance.unSubscribeTopic(mTopicArray);
-        }
+        }*/
     }
 }
