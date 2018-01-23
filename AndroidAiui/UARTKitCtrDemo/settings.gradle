@@ -1,0 +1,7 @@
+include ':app'
+
+include ':UARTKit'
+
+project(':UARTKit').projectDir = new File('../UARTKit')
+
+include ':UARTKit:uart'

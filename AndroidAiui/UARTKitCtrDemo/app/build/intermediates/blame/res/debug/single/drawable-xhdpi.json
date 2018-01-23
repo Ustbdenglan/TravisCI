@@ -1,0 +1,14 @@
+[
+    {
+        "merged": "D:\\code\\UARTKitCtrDemo\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\ic_launcher.png",
+        "source": "D:\\code\\UARTKitCtrDemo\\app\\src\\main\\res\\drawable-xhdpi\\ic_launcher.png"
+    },
+    {
+        "merged": "D:\\aiui\\UARTKitCtrDemo\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\ic_launcher.png",
+        "source": "D:\\aiui\\UARTKitCtrDemo\\app\\src\\main\\res\\drawable-xhdpi\\ic_launcher.png"
+    },
+    {
+        "merged": "D:\\UARTKitCtrDemo\\app\\build\\intermediates\\res\\merged\\debug\\drawable-xhdpi\\ic_launcher.png",
+        "source": "D:\\UARTKitCtrDemo\\app\\src\\main\\res\\drawable-xhdpi\\ic_launcher.png"
+    }
+]

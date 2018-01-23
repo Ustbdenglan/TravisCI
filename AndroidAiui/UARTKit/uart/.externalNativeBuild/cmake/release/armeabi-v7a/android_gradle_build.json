@@ -1,0 +1,44 @@
+
+{
+	"buildFiles" : [ "D:/code/UARTKit/uart/CMakeLists.txt" ],
+	"cFileExtensions" : [ "c" ],
+	"cleanCommands" : 
+	[
+		"D:\\studio\\AndroidSDK\\cmake\\3.6.3155560\\bin\\cmake.exe --build D:\\code\\UARTKit\\uart\\.externalNativeBuild\\cmake\\release\\armeabi-v7a --target clean"
+	],
+	"libraries" : 
+	{
+		"uart_helper-Release-armeabi-v7a" : 
+		{
+			"abi" : "armeabi-v7a",
+			"artifactName" : "uart_helper",
+			"buildCommand" : "D:\\studio\\AndroidSDK\\cmake\\3.6.3155560\\bin\\cmake.exe --build D:\\code\\UARTKit\\uart\\.externalNativeBuild\\cmake\\release\\armeabi-v7a --target uart_helper",
+			"buildType" : "release",
+			"files" : 
+			[
+				
+				{
+					"flags" : "  --target=armv7-none-linux-androideabi --gcc-toolchain=D:/studio/AndroidSDK/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/windows-x86_64 --sysroot=D:/studio/AndroidSDK/ndk-bundle/sysroot -Duart_helper_EXPORTS  -isystem D:/studio/AndroidSDK/ndk-bundle/sysroot/usr/include/arm-linux-androideabi -D__ANDROID_API__=14 -g -DANDROID -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -march=armv7-a -mfloat-abi=softfp -mfpu=vfpv3-d16 -fno-integrated-as -mthumb -Wa,--noexecstack -Wformat -Werror=format-security  -Os -DNDEBUG  -fPIC      -c ",
+					"src" : "D:/code/UARTKit/uart/src/main/cpp/entry.c",
+					"workingDirectory" : "D:/code/UARTKit/uart/.externalNativeBuild/cmake/release/armeabi-v7a"
+				},
+				
+				{
+					"flags" : "  --target=armv7-none-linux-androideabi --gcc-toolchain=D:/studio/AndroidSDK/ndk-bundle/toolchains/arm-linux-androideabi-4.9/prebuilt/windows-x86_64 --sysroot=D:/studio/AndroidSDK/ndk-bundle/sysroot -Duart_helper_EXPORTS  -isystem D:/studio/AndroidSDK/ndk-bundle/sysroot/usr/include/arm-linux-androideabi -D__ANDROID_API__=14 -g -DANDROID -ffunction-sections -funwind-tables -fstack-protector-strong -no-canonical-prefixes -march=armv7-a -mfloat-abi=softfp -mfpu=vfpv3-d16 -fno-integrated-as -mthumb -Wa,--noexecstack -Wformat -Werror=format-security  -Os -DNDEBUG  -fPIC      -c ",
+					"src" : "D:/code/UARTKit/uart/src/main/cpp/uart.c",
+					"workingDirectory" : "D:/code/UARTKit/uart/.externalNativeBuild/cmake/release/armeabi-v7a"
+				}
+			],
+			"output" : "D:/code/UARTKit/uart/build/intermediates/cmake/release/obj/armeabi-v7a/libuart_helper.so",
+			"toolchain" : "4021690649"
+		}
+	},
+	"toolchains" : 
+	{
+		"4021690649" : 
+		{
+			"cCompilerExecutable" : "D:/studio/AndroidSDK/ndk-bundle/toolchains/llvm/prebuilt/windows-x86_64/bin/clang.exe",
+			"cppCompilerExecutable" : "D:/studio/AndroidSDK/ndk-bundle/toolchains/llvm/prebuilt/windows-x86_64/bin/clang++.exe"
+		}
+	}
+}

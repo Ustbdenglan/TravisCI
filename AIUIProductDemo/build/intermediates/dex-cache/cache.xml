@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="utf-8"?>
+<items version="2" >
+
+    <item
+        is-multidex="false"
+        jar="D:\studio\AndroidSDK\extras\android\m2repository\com\android\support\support-v4\19.1.0\support-v4-19.1.0.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="85f201b380937e61a9dce6ca90ccf6872abbfb67">
+        <dex dex="D:\code\AIUIProductDemo\app\build\intermediates\pre-dexed\debug\support-v4-19.1.0_8f1e67ab96ff2ac820237289e8a6343c31f1d899.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="D:\code\AIUIProductDemo\app\libs\AIUIDeamon.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="79ea13e5d448bca2f6828cbd3a59d7f5587a8250">
+        <dex dex="D:\code\AIUIProductDemo\app\build\intermediates\pre-dexed\debug\AIUIDeamon_72f30331eb5705bb2cedad41c44040bc4419397c.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="D:\code\AIUIProductDemo\app\libs\AIUIAssistKit.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="1f19d54a774a4226c294796be99431cda9a4cf8d">
+        <dex dex="D:\code\AIUIProductDemo\app\build\intermediates\pre-dexed\debug\AIUIAssistKit_7032ab46342dbc7c727d0d0ecb580d239e675e8c.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="D:\code\AIUIProductDemo\app\libs\AIUIServiceKit.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="0945b0156ba2c7b1654f1ab8db183b72a609d175">
+        <dex dex="D:\code\AIUIProductDemo\app\build\intermediates\pre-dexed\debug\AIUIServiceKit_e8740362873114c39804b07b9a5e2ddf8295e25b.jar" />
+    </item>
+    <item
+        is-multidex="false"
+        jar="D:\code\AIUIProductDemo\app\libs\DevBoardControl.jar"
+        jumboMode="false"
+        optimize="true"
+        revision="25.0.2"
+        sha1="1886dc447d04c79373c838cbbfdcef49d094d959">
+        <dex dex="D:\code\AIUIProductDemo\app\build\intermediates\pre-dexed\debug\DevBoardControl_3e8fd83abfc8a787fdf381829596f5786a458be6.jar" />
+    </item>
+
+</items>

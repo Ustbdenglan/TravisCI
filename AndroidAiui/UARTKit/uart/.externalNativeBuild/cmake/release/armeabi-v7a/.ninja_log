@@ -1,0 +1,4 @@
+# ninja log v5
+1	396	0	CMakeFiles/uart_helper.dir/src/main/cpp/entry.c.o	827764b3f9a7c01e
+17	398	0	CMakeFiles/uart_helper.dir/src/main/cpp/uart.c.o	b010c3da9cc4d47a
+399	602	0	../../../../build/intermediates/cmake/release/obj/armeabi-v7a/libuart_helper.so	f86083e14e87ed6d
