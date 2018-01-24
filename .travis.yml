@@ -7,8 +7,4 @@ android:
     - extra-android-m2repository
     - extra-android-support
 
-before_install:
-  - chmod +x gradlew
-  
-script:  
-  - ./gradlew assembleRelease
+
